@@ -13,6 +13,7 @@ namespace OnlineMarket.DAL.Entity
         public int Id { get; set; }
         public string SellerName { get; set; }
         public string SellerDescription { get; set; }
+        public IEnumerable<Payment> Payment { get; set; }
         public User User { get; set; } 
         public IEnumerable<Category> Category { get; set; }
         public IEnumerable<Product> Product { get; set; }
