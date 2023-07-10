@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMarket.DAL.SQLRepositories
 {
-    internal class ProductRepository : IBaseRepository<Product>
+    public class ProductRepository : IBaseRepository<Product>
     {
         private readonly ApplicationDbContext _context;
         public ProductRepository(ApplicationDbContext context)

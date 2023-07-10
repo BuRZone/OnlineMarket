@@ -1,0 +1,16 @@
+﻿@using OnlineMarket.DAL.Entity;
+@model Category
+
+<p>Create new Category</p>
+
+<form asp-action="Create" enctype="multipart/form-data" id="formSaveCar">
+
+    <div asp-validation-summary="All" style="font-size:23px; font-family:Impact, serif" class="text-danger text-center"></div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.CategoryName" class="col-form-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.CategoryName">
+        </div>
+    </div>
+    <button class="btn btn-primary">Отправить</button>
+</form>

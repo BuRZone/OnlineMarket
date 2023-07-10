@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarket", "OnlineMarket\OnlineMarket.csproj", "{0A9E551E-8818-41C0-A528-2CF5806B1157}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarket", "OnlineMarket\OnlineMarket.csproj", "{0A9E551E-8818-41C0-A528-2CF5806B1157}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{484DAEAE-676F-48C7-919F-7E169B0FCE0F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LOGIC", "LOGIC", "{652E97DE-60A8-402B-93BF-8C12689BD676}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SERVICE", "SERVICE", "{368183CB-5840-4CDF-B2AD-F0F3F23C6437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarket.DAL", "OnlineMarket.DAL\OnlineMarket.DAL.csproj", "{0403002B-73A8-484A-AD0B-4E9487D43F83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarket.DAL", "OnlineMarket.DAL\OnlineMarket.DAL.csproj", "{0403002B-73A8-484A-AD0B-4E9487D43F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarket.BLL", "BLL\OnlineMarket.BLL.csproj", "{4751857C-822F-47CF-82B5-165595714204}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,12 +27,17 @@ Global
 		{0403002B-73A8-484A-AD0B-4E9487D43F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0403002B-73A8-484A-AD0B-4E9487D43F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0403002B-73A8-484A-AD0B-4E9487D43F83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4751857C-822F-47CF-82B5-165595714204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4751857C-822F-47CF-82B5-165595714204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4751857C-822F-47CF-82B5-165595714204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4751857C-822F-47CF-82B5-165595714204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0403002B-73A8-484A-AD0B-4E9487D43F83} = {484DAEAE-676F-48C7-919F-7E169B0FCE0F}
+		{4751857C-822F-47CF-82B5-165595714204} = {652E97DE-60A8-402B-93BF-8C12689BD676}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C43DCD5E-B16E-4891-AFDF-807C290F6204}

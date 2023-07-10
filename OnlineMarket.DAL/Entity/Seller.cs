@@ -2,6 +2,7 @@
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,12 @@ namespace OnlineMarket.DAL.Entity
         public string SellerName { get; set; }
         public string SellerDescription { get; set; }
         public IEnumerable<Payment> Payment { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; } 
         public IEnumerable<Category> Category { get; set; }
         public IEnumerable<Product> Product { get; set; }
+        [NotMapped]
         public IFormFile? SellerformFile { get; set; }
-        public byte[]? SellerLogo { get; set; }
+        public byte[]? SellerPhoto { get; set; }
     }
 }

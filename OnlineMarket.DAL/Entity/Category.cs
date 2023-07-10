@@ -11,9 +11,8 @@ namespace OnlineMarket.DAL.Entity
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
-        public IEnumerable<Product> Product { get; set; }
-        public IEnumerable<Seller> Seller { get; set; }
-        public IFormFile? CategoryformFile { get; set; }
-        public byte[]? CategoryPhoto { get; set; }
+        public IEnumerable<Product>? Product { get; set; }
+        public IEnumerable<Seller>? Seller { get; set; }
+
     }
 }

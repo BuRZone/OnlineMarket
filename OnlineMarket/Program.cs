@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using OnlineMarket;
+using OnlineMarket.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ApplicationDbContext>(o =>
+                    o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.InitializeRepositories();
+builder.Services.InitializeServices();
 
 var app = builder.Build();
 

@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineMarket.DAL.Entity
+namespace OnlineMarket.BLL.ViewModels.Order
 {
-
-    public  class Order
+    internal class OrderVM
     {
         public int Id { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public string ProductName { get; set; }
+
+        public byte[]? ProductPhoto { get; set; }
 
         public string Address { get; set; }
 
@@ -20,7 +21,7 @@ namespace OnlineMarket.DAL.Entity
         public string LastName { get; set; }
 
         public string MiddleName { get; set; }
-        public int BasketId { get; set; }
-        public Basket Basket { get; set; }
+
+        public string DateCreate { get; set; }
     }
 }
