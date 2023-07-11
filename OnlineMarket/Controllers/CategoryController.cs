@@ -9,9 +9,11 @@ namespace OnlineMarket.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
+        //private readonly ILogger<Category> _logger;
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService; 
+
         }
         public IActionResult Index()
         {
@@ -55,6 +57,13 @@ namespace OnlineMarket.Controllers
         {
             await _categoryService.Delete(id);
             return RedirectToAction("GetCategory");
+        }
+
+
+        public async Task<IActionResult> GetAll(int Id)
+        {
+            var cat = await _categoryService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(m => m.Id == Id);
+            return View(cat);
         }
     }
 }

@@ -10,8 +10,8 @@ namespace OnlineMarket.BLL.Service.Interfaces
     public interface IProductService
     {
         IQueryable<Product> GetAsync();
-        Task CreateAsync(Product product, byte[]? imageData);
-        Task<Product> UpdateAsync(int? id, byte[]? imageData);
+        Task CreateAsync(Product product);
+        Task<Product> UpdateAsync(int? id);
         Task Delete(int? id);
     }
 }

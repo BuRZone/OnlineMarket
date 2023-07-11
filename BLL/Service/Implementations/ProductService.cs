@@ -18,11 +18,10 @@ namespace OnlineMarket.BLL.Service.Implementations
         {
             _repository = repository;
         }
-        public async Task CreateAsync(Product product, byte[]? imageData)
+        public async Task CreateAsync(Product product)
         {
             try
             {
-                _repository.GetAsync().Select(x => x.ProductPhoto).Append(imageData);
                 await _repository.CreateAsync(product);
             }
             catch (Exception ex)
@@ -53,7 +52,7 @@ namespace OnlineMarket.BLL.Service.Implementations
             return _repository.GetAsync();
         }
 
-        public async Task<Product> UpdateAsync(int? id, byte[]? imageData)
+        public async Task<Product> UpdateAsync(int? id)
         {
             try
             {
@@ -61,7 +60,6 @@ namespace OnlineMarket.BLL.Service.Implementations
 
                 if (product != null)
                 {
-                    _repository.GetAsync().Select(x => x.ProductPhoto).Append(imageData);
                     await _repository.UpdateAsync(product);
                 }
                 return product;

@@ -12,7 +12,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    <a asp-action="GetAll" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.CategoryName)</a>
                     </td>
 
                     <td>
