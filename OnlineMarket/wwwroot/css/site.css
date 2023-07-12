@@ -2,7 +2,7 @@ html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 10000px) {
   html {
     font-size: 16px;
   }
@@ -13,10 +13,22 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    width: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+
+}
+
+
+    footer {
+    /* Позиционируем footer внизу main */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Высота footer */
+    height: 40px;
 }

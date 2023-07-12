@@ -37,14 +37,14 @@ namespace OnlineMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Product product, byte[] imageData)
         {
-            using (var binaryReader = new BinaryReader(product.ProductformFile.OpenReadStream()))
-            {
-                imageData = binaryReader.ReadBytes((int)product.ProductformFile.Length);
-            }
-            product.ProductPhoto = imageData;
+                using (var binaryReader = new BinaryReader(product.ProductformFile.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int)product.ProductformFile.Length);
+                }
+                    product.ProductPhoto = imageData;
 
                 await _productService.CreateAsync(product);
-            return RedirectToAction("GetProduct");
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -65,7 +65,7 @@ namespace OnlineMarket.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _productService.Delete(id);
-            return RedirectToAction("GetProduct");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

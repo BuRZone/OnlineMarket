@@ -2,12 +2,7 @@
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
-using OnlineMarket.DAL.SQLRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
@@ -24,9 +19,9 @@ namespace OnlineMarket.BLL.Service.Implementations
         {
             try
             {
-                var categoryList = await _repository.GetAsync().ToListAsync();
-                var categoryFind = categoryList.FirstOrDefault(p => p.CategoryName.Equals(category.CategoryName));
-                if (categoryFind == null)
+                var categoryList = await _repository.GetAsync().FirstOrDefaultAsync(p => p.CategoryName.Equals(category.CategoryName));
+                //var categoryFind = categoryList.FirstOrDefault(p => p.CategoryName.Equals(category.CategoryName));
+                if (categoryList == null)
                 {
                     await _repository.CreateAsync(category);
                 }

@@ -9,7 +9,7 @@ namespace OnlineMarket.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
-        //private readonly ILogger<Category> _logger;
+
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService; 

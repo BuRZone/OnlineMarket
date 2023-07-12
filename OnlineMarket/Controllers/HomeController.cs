@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.DAL.Entity;
 using OnlineMarket.Models;
 using System.Diagnostics;
 
@@ -6,17 +8,19 @@ namespace OnlineMarket.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+        public HomeController(IProductService productService, ICategoryService categoryService)
         {
-            _logger = logger;
+            _productService = productService;
+            _categoryService = categoryService;
         }
-
         public IActionResult Index()
         {
-            return View();
+            var productList = new List<Product>(_productService.GetAsync());
+            return View(productList);
         }
+
 
         public IActionResult Privacy()
         {
