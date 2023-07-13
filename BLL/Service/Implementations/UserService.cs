@@ -1,7 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Seller;
+using OnlineMarket.BLL.ViewModels.User;
 using OnlineMarket.DAL.Entity;
+using OnlineMarket.DAL.Enum;
 using OnlineMarket.DAL.Interfaces;
+using OnlineMarket.LOGIC.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,34 +15,39 @@ using System.Threading.Tasks;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
-    
-    
-
     public class UserService : IUserService
     {
+        private readonly ILogger<User> _logger;
         private readonly IBaseRepository<User> _repository;
 
-        public UserService(IBaseRepository<User> repository)
+        public UserService(ILogger<User> logger, IBaseRepository<User> repository)
         {
+            _logger = logger;
             _repository = repository;
         }
-        public async Task CreateAsync(User user)
+        public async Task CreateAsync(UserVM user)
         {
             try
             {
-                var userList = await _repository.GetAsync().ToListAsync();
-                if (!userList.Contains(user))
+                var userQ = await _repository.GetAsync().FirstOrDefaultAsync(p => p.UserName.Equals(user.UserName));
+                if (userQ == null)
                 {
-                    await _repository.CreateAsync(user);
+                    var usr = new User()
+                    {
+                        UserName = user.UserName,
+                        Role = Enum.Parse<Role>(user.Role),
+                        Password = HashPasswordHelper.HashPassowrd(user.Password)
+
+                    };
+                    await _repository.CreateAsync(usr);
+                    _logger.LogInformation($"[UserService.CreateAsync] создан новый пользователь {usr.UserName}");
                 }
             }
             catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError(ex, $"[UserService.CreateAsync] error: {ex.Message}");
             }
         }
-
         public async Task Delete(int? id)
         {
             try
@@ -47,11 +57,12 @@ namespace OnlineMarket.BLL.Service.Implementations
                 if (user != null)
                 {
                     await _repository.Delete(user);
+                    _logger.LogInformation($"[UserService.Delete] пользователь удален {user}");
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, $"[UserService.Delete] error: {ex.Message}");
             }
         }
 
@@ -59,8 +70,7 @@ namespace OnlineMarket.BLL.Service.Implementations
         {
             return _repository.GetAsync();
         }
-
-        public async Task<User> UpdateAsync(int? id)
+        public async Task UpdateAsync(int? id)
         {
             try
             {
@@ -69,12 +79,12 @@ namespace OnlineMarket.BLL.Service.Implementations
                 if (user != null)
                 {
                     await _repository.UpdateAsync(user);
+                    _logger.LogInformation($"[UserService.UpdateAsync] продавец обновлен {user.UserName}");
                 }
-                return user;
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, $"[UserService.UpdateAsync] error: {ex.Message}");
             }
         }
     }

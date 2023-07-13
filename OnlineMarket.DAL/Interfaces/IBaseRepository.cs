@@ -10,7 +10,7 @@ namespace OnlineMarket.DAL.Interfaces
     {
         IQueryable<T> GetAsync();
         Task CreateAsync(T entity);
-        Task<T> UpdateAsync(T entity);
+        Task UpdateAsync(T entity);
         Task Delete(T entity);
 
     }

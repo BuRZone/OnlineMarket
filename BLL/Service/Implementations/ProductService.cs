@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Category;
+using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
 using System;
@@ -12,22 +15,35 @@ namespace OnlineMarket.BLL.Service.Implementations
 {
     public class ProductService : IProductService
     {
+        private readonly ILogger<ProductService> _logger;
         private readonly IBaseRepository<Product> _repository;
 
-        public ProductService(IBaseRepository<Product> repository)
+        public ProductService(ILogger<ProductService> logger, IBaseRepository<Product> repository)
         {
+            _logger = logger;
             _repository = repository;
         }
-        public async Task CreateAsync(Product product)
+        public async Task CreateAsync(ProductVM product)
         {
             try
             {
-                await _repository.CreateAsync(product);
+                var productQ = await _repository.GetAsync().FirstOrDefaultAsync(p => p.ProductName.Equals(product.ProductName));
+                if (productQ == null)
+                {
+                    var prod = new Product()
+                    {
+                        ProductName = product.ProductName,
+                        ProductDescription = product.ProductDescription,
+                        ProductPhoto = product.ProductPhoto
+
+                    };
+                    await _repository.CreateAsync(prod);
+                    _logger.LogInformation($"[ProductService.CreateAsync] создан новый продукт {prod.ProductName}");
+                }
             }
             catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError(ex, $"[ProductService.CreateAsync] error: {ex.Message}");
             }
         }
         public async Task Delete(int? id)
@@ -39,11 +55,12 @@ namespace OnlineMarket.BLL.Service.Implementations
                 if (product != null)
                 {
                     await _repository.Delete(product);
+                    _logger.LogInformation($"[ProductService.Delete] продукт удален {product}");
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, $"[ProductService.Delete] error: {ex.Message}");
             }
         }
 
@@ -52,7 +69,7 @@ namespace OnlineMarket.BLL.Service.Implementations
             return _repository.GetAsync();
         }
 
-        public async Task<Product> UpdateAsync(int? id)
+        public async Task UpdateAsync(int? id)
         {
             try
             {
@@ -61,12 +78,12 @@ namespace OnlineMarket.BLL.Service.Implementations
                 if (product != null)
                 {
                     await _repository.UpdateAsync(product);
+                    _logger.LogInformation($"[ProductService.UpdateAsync] продукт обновлен {product.ProductName}");
                 }
-                return product;
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, $"[ProductService.UpdateAsync] error: {ex.Message}");
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using OnlineMarket.DAL.Entity;
+﻿using OnlineMarket.BLL.ViewModels.Product;
+using OnlineMarket.DAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace OnlineMarket.BLL.Service.Interfaces
     public interface IProductService
     {
         IQueryable<Product> GetAsync();
-        Task CreateAsync(Product product);
-        Task<Product> UpdateAsync(int? id);
+        Task CreateAsync(ProductVM product);
+        Task UpdateAsync(int? id);
         Task Delete(int? id);
     }
 }

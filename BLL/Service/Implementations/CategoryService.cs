@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
 
@@ -8,28 +10,34 @@ namespace OnlineMarket.BLL.Service.Implementations
 {
     public class CategoryService : ICategoryService
     {
+        private readonly ILogger<UserService> _logger;
         private readonly IBaseRepository<Category> _repository;
 
-        public CategoryService(IBaseRepository<Category> repository)
+        public CategoryService(ILogger<UserService> logger, IBaseRepository<Category> repository)
         {
+            _logger = logger;
             _repository = repository;
         }
 
-        public async Task CreateAsync(Category category)
+        public async Task CreateAsync(CategoryVM category)
         {
             try
             {
-                var categoryList = await _repository.GetAsync().FirstOrDefaultAsync(p => p.CategoryName.Equals(category.CategoryName));
-                //var categoryFind = categoryList.FirstOrDefault(p => p.CategoryName.Equals(category.CategoryName));
-                if (categoryList == null)
+                var categoryQ = await _repository.GetAsync().FirstOrDefaultAsync(p => p.CategoryName.Equals(category.CategoryName));
+                if (categoryQ == null)
                 {
-                    await _repository.CreateAsync(category);
+                    var cat = new Category()
+                    {
+                        CategoryName = category.CategoryName
+
+                    };
+                    await _repository.CreateAsync(cat);
+                    _logger.LogInformation($"[CategoryService.CreateAsync] создана новая категория {cat.CategoryName}");
                 }
             }
             catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError(ex, $"[CategoryService.CreateAsync] error: {ex.Message}");
             }
         }
 
@@ -37,39 +45,41 @@ namespace OnlineMarket.BLL.Service.Implementations
         {
             try
             { 
-                var category = await _repository.GetAsync().FirstOrDefaultAsync(x => x.Id == id);
+                var categoryQ = await _repository.GetAsync().FirstOrDefaultAsync(x => x.Id == id);
 
-                if (category != null)
+                if (categoryQ != null)
                 {
-                    await _repository.Delete(category);
+                    await _repository.Delete(categoryQ);
+                    _logger.LogInformation($"[CategroyService.Delete] категория удалена {categoryQ}");
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, $"[CategoryService.Delete] error: {ex.Message}");
             }
         }
 
         public IQueryable<Category> GetAsync()
         {
+             
             return _repository.GetAsync();
         }
 
-        public async Task<Category> UpdateAsync(int? id)
+        public async Task UpdateAsync(int? id)
         {
             try
             {
-                var category = await _repository.GetAsync().FirstOrDefaultAsync(x => x.Id == id);
-                
-                if (category != null)
+                var categoryQ = await _repository.GetAsync().FirstOrDefaultAsync(x => x.Id == id);
+                if (categoryQ != null)
                 {
-                    await _repository.UpdateAsync(category);
+                    await _repository.UpdateAsync(categoryQ);
+
+                    _logger.LogInformation($"[CategoryService.UpdateAsync] категория обновлена {categoryQ.CategoryName}");
                 }
-                    return category;
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, $"[CategoryService.UpdateAsync] error: {ex.Message}");
             }
         }
     }

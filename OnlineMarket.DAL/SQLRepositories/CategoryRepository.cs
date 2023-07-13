@@ -52,12 +52,10 @@ namespace OnlineMarket.DAL.SQLRepositories
             return _context.Categories;
         }
 
-        public async Task<Category> UpdateAsync(Category category)
+        public async Task UpdateAsync(Category category)
         {
             _context.Categories.Update(category);
             await _context.SaveChangesAsync();
-
-            return category;
         }
     }
 }

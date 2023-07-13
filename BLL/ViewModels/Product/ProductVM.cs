@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace OnlineMarket.BLL.ViewModels.Product
 {
-    internal class ProductVM
+    public class ProductVM
     {
         public int Id { get; set; }
         [Display(Name = "Название товара")]

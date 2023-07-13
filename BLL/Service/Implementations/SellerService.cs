@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Product;
+using OnlineMarket.BLL.ViewModels.Seller;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
 using System;
@@ -12,31 +15,37 @@ namespace OnlineMarket.BLL.Service.Implementations
 {
     public class SellerService : ISellerService
     {
+        private readonly ILogger<Seller> _logger;
         private readonly IBaseRepository<Seller> _repository;
 
-        public SellerService(IBaseRepository<Seller> repository)
+        public SellerService(ILogger<Seller> logger, IBaseRepository<Seller> repository)
         {
+            _logger = logger;
             _repository = repository;
         }
-        public async Task CreateAsync(Seller seller, byte[]? imageData)
+        public async Task CreateAsync(SellerVM seller)
         {
             try
             {
-                var sellerList = await _repository.GetAsync().ToListAsync();
-                if (!sellerList.Contains(seller))
+                var sellerQ = await _repository.GetAsync().FirstOrDefaultAsync(p => p.SellerName.Equals(seller.SellerName));
+                if (sellerQ == null)
                 {
-                    _repository.GetAsync().Select(x => x.SellerPhoto).Append(imageData);
+                    var sel = new Seller()
+                    {
+                        SellerName = seller.SellerName,
+                        SellerDescription = seller.SellerDescription,
+                        SellerPhoto = seller.SellerPhoto
 
-                    await _repository.CreateAsync(seller);
+                    };
+                    await _repository.CreateAsync(sel);
+                    _logger.LogInformation($"[SellerService.CreateAsync] создана новый продавец {sel.SellerName}");
                 }
             }
             catch (Exception ex)
             {
-
-                throw;
+                _logger.LogError(ex, $"[SellerService.CreateAsync] error: {ex.Message}");
             }
         }
-
         public async Task Delete(int? id)
         {
             try
@@ -46,11 +55,12 @@ namespace OnlineMarket.BLL.Service.Implementations
                 if (seller != null)
                 {
                     await _repository.Delete(seller);
+                    _logger.LogInformation($"[ProductService.Delete] продавец удален {seller}");
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, $"[ProductService.Delete] error: {ex.Message}");
             }
         }
 
@@ -59,7 +69,7 @@ namespace OnlineMarket.BLL.Service.Implementations
             return _repository.GetAsync();
         }
 
-        public async Task<Seller> UpdateAsync(int? id, byte[]? imageData)
+        public async Task UpdateAsync(int? id)
         {
             try
             {
@@ -67,14 +77,13 @@ namespace OnlineMarket.BLL.Service.Implementations
 
                 if (seller != null)
                 {
-                    _repository.GetAsync().Select(x => x.SellerPhoto).Append(imageData);
                     await _repository.UpdateAsync(seller);
+                    _logger.LogInformation($"[ProductService.UpdateAsync] продавец обновлен {seller.SellerName}");
                 }
-                return seller;
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex, $"[ProductService.UpdateAsync] error: {ex.Message}");
             }
         }
     }

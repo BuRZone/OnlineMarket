@@ -51,12 +51,10 @@ namespace OnlineMarket.DAL.SQLRepositories
             return _context.Sellers;
         }
 
-        public async Task<Seller> UpdateAsync(Seller seller)
+        public async Task UpdateAsync(Seller seller)
         {
             _context.Sellers.Update(seller);
             await _context.SaveChangesAsync();
-
-            return seller;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using OnlineMarket.DAL.Entity;
+﻿using OnlineMarket.BLL.ViewModels.Category;
+using OnlineMarket.DAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace OnlineMarket.BLL.Service.Interfaces
     public interface ICategoryService
     {
         IQueryable<Category> GetAsync();
-        Task CreateAsync(Category category);
-        Task<Category> UpdateAsync(int? id);
+        Task CreateAsync(CategoryVM category);
+        Task UpdateAsync(int? id);
         Task Delete(int? id);
     }
 }

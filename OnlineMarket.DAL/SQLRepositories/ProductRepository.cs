@@ -51,12 +51,10 @@ namespace OnlineMarket.DAL.SQLRepositories
            return _context.Products;
         }
 
-        public async Task<Product> UpdateAsync(Product product)
+        public async Task UpdateAsync(Product product)
         {
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
-
-            return product;
         }
     }
 }
