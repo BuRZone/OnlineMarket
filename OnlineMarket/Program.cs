@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket;
 using OnlineMarket.DAL;
@@ -11,6 +12,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(o =>
 
 builder.Services.InitializeRepositories();
 builder.Services.InitializeServices();
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+   AddCookie(o =>
+   {
+       o.LoginPath = new PathString("/Account/Login");
+       o.AccessDeniedPath = new PathString("/Account/Login");
+   });
+builder.Services.AddAuthorization(); 
 
 var app = builder.Build();
 
@@ -27,6 +37,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

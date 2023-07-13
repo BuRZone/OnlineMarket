@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
+using OnlineMarket.DAL.Entity;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace OnlineMarket.BLL.ViewModels.Product
 {
@@ -24,6 +20,7 @@ namespace OnlineMarket.BLL.ViewModels.Product
         [Display(Name = "Количество")]
         [Required(ErrorMessage = "Укажите количество")]
         public int Quantity { get; set; }
+        public int CategoryId { get; set; }
         public IFormFile? ProductformFile { get; set; }
         public byte[]? ProductPhoto { get; set; }
     }

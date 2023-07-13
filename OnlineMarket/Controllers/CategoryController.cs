@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.DAL.Entity;
 
 namespace OnlineMarket.Controllers
@@ -32,7 +33,7 @@ namespace OnlineMarket.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Category category) 
+        public async Task<IActionResult> Create(CategoryVM category) 
         {
             await _categoryService.CreateAsync(category);
             return RedirectToAction("GetCategory");

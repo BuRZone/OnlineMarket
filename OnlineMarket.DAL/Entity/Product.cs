@@ -18,8 +18,6 @@ namespace OnlineMarket.DAL.Entity
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public IEnumerable<Seller> Seller { get; set; }
-        [NotMapped]
-        public IFormFile? ProductformFile { get; set; }
         public byte[]? ProductPhoto { get; set; }
     }
 }

@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home">OnlineMarket</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">OnlineMarket </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -29,7 +29,7 @@
                             <a class="nav-link" asp-controller="Category" asp-action="GetCategory">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" asp-controller="Product" asp-action="GetProduct">Product</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>

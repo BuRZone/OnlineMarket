@@ -33,8 +33,11 @@ namespace OnlineMarket.BLL.Service.Implementations
                     var prod = new Product()
                     {
                         ProductName = product.ProductName,
+                        Quantity = product.Quantity,
                         ProductDescription = product.ProductDescription,
-                        ProductPhoto = product.ProductPhoto
+                        ProductPhoto = product.ProductPhoto,
+                        Price = product.Price,
+                        CategoryId = product.CategoryId
 
                     };
                     await _repository.CreateAsync(prod);

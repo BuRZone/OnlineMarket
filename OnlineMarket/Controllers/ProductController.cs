@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
 
 namespace OnlineMarket.Controllers
@@ -20,31 +21,35 @@ namespace OnlineMarket.Controllers
         {
             return View();
         }
-        public IActionResult GetProduct()
+        public async Task<IActionResult> GetProduct()
         {
-            var productList = new List<Product>(_productService.GetAsync());
+            var productList = await _productService.GetAsync().ToListAsync();
             return View(productList);
         }
 
         public async Task <IActionResult> Create()
         {
-            var category = await _categoryService.GetAsync().ToListAsync();
+            var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName}).ToListAsync();
 
-            ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
+            ViewData["Category"] =  new SelectList(category, "Id", "CategoryName");
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product product, byte[] imageData)
+        public async Task<IActionResult> Create(ProductVM product, byte[]? imageData)
         {
+
                 using (var binaryReader = new BinaryReader(product.ProductformFile.OpenReadStream()))
                 {
                     imageData = binaryReader.ReadBytes((int)product.ProductformFile.Length);
                 }
-                    product.ProductPhoto = imageData;
+
+                product.ProductPhoto = imageData;
 
                 await _productService.CreateAsync(product);
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+
+
         }
 
         public async Task<IActionResult> Delete(int? id)
