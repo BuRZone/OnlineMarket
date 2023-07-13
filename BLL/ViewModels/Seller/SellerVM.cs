@@ -3,12 +3,7 @@ using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.BLL.ViewModels.User;
 using OnlineMarket.DAL.Entity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineMarket.BLL.ViewModels.Seller
 {

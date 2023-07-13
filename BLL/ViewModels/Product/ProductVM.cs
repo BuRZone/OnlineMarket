@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using OnlineMarket.DAL.Entity;
 using System.ComponentModel.DataAnnotations;
 
 

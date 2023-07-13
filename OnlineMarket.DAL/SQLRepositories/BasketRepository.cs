@@ -1,24 +1,29 @@
 ﻿using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OnlineMarket.DAL.SQLRepositories
 {
-    public class ProductRepository : IBaseRepository<Product>
+    public class BasketRepository : IBaseRepository<Basket>
     {
         private readonly ApplicationDbContext _context;
-        public ProductRepository(ApplicationDbContext context)
+        public BasketRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task CreateAsync(Product product)
+        public async Task CreateAsync(Basket entity)
         {
-            _context.Products.Add(product);
+            _context.Baskets.Add(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(Product product)
+        public async Task Delete(Basket basket)
         {
-            _context.Products.Remove(product);
+            _context.Baskets.Remove(basket);
             await _context.SaveChangesAsync();
 
         }
@@ -41,14 +46,14 @@ namespace OnlineMarket.DAL.SQLRepositories
             GC.SuppressFinalize(this);
         }
 
-        public IQueryable<Product> GetAsync()
+        public IQueryable<Basket> GetAsync()
         {
-           return _context.Products;
+            return _context.Baskets;
         }
 
-        public async Task UpdateAsync(Product product)
+        public async Task UpdateAsync(Basket basket)
         {
-            _context.Products.Update(product);
+            _context.Baskets.Update(basket);
             await _context.SaveChangesAsync();
         }
     }

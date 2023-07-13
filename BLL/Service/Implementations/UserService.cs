@@ -1,17 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineMarket.BLL.Service.Interfaces;
-using OnlineMarket.BLL.ViewModels.Seller;
 using OnlineMarket.BLL.ViewModels.User;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Enum;
 using OnlineMarket.DAL.Interfaces;
 using OnlineMarket.LOGIC.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {

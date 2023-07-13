@@ -8,20 +8,10 @@ using System.Threading.Tasks;
 
 namespace OnlineMarket.DAL.Entity
 {
-    public enum OrderStatus
-    {
-        AwaitingPayment,
-        Paied,
-        InProgress,
-        Shipped,
-        Сancelled
-
-    }
     public class Basket
     {
         [Key]
         public int Id { get; set; }
-        public OrderStatus Status { get; set; }
         public IEnumerable<Product> Product { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }

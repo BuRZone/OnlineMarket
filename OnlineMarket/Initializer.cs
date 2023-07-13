@@ -1,6 +1,4 @@
-﻿
-
-using OnlineMarket.BLL.Service.Implementations;
+﻿using OnlineMarket.BLL.Service.Implementations;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;

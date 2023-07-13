@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineMarket.BLL.Response
+﻿namespace OnlineMarket.BLL.Response
 {
     public class BaseResponse<T> : IBaseResponse<T>
     {
