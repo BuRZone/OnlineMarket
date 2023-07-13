@@ -13,42 +13,26 @@
 </header>
 
 
-<div class="container">
-    <div class="row pt-4 pb-3">
-        <div class="col-6">
-            <h2 class="text-primary">
-                Product List
-            </h2>
-        </div>
-        <div class="col-6 text-end">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i> Create New Product
-            </a>
-        </div>
-    </div>
-</div>
-
-
-
 <div class="card_container">
 
     @foreach (var item in Model)
     {
-
         <div class="container" style="position:center;">
             <div class="card text-white bg-secondary mb-3" style="max-width: 15rem;max-height:19rem;overflow:hidden;">
-                <div class="card-header">@Html.DisplayFor(modelItem => item.ProductName)</div>
-                <img src="data:image/jpeg;base64,@Convert.ToBase64String(item?.ProductPhoto ?? Array.Empty<byte>())" class="img-fluid rounded-start rounded"
-                    width="200" height="200" focusable="false" role="img" preserveAspectRatio="xMidYMid slice">
+@*                <div class="card-header">@Html.DisplayFor(modelItem => item.ProductName)</div>*@
+                <div style="width:210px;">
+                    <svg width="210" height="134"> <image href="data:image/jpeg;base64,@Convert.ToBase64String(item?.ProductPhoto ?? Array.Empty<byte>())"
+                     width="100%" height="100%" style="overflow:hidden" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"/>
+                     </svg>
+                </div>
                 <div class="card-body" style="overflow-y:scroll;">
-                    <h4 class="card-title" style="margin-top:-25px; ">@Html.DisplayFor(modelItem => item.ProductDescription)</h4>
-                    <p class="card-text" style="min-height:17rem;">
+                    <h4 class="card-title" style="margin-top:-25px;">@Html.DisplayFor(modelItem => item.ProductDescription)</h4>
+                    <p class="card-text" >
                         @Html.DisplayFor(modelItem => item.Price)
                     </p>
                 </div>
             </div>
         </div>
-
     }
 </div>
 
