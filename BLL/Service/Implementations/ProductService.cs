@@ -21,9 +21,6 @@ namespace OnlineMarket.BLL.Service.Implementations
         {
             try
             {
-                var productQ = await _repository.GetAsync().FirstOrDefaultAsync(p => p.ProductName.Equals(product.ProductName));
-                if (productQ == null)
-                {
                     var prod = new Product()
                     {
                         ProductName = product.ProductName,
@@ -36,7 +33,6 @@ namespace OnlineMarket.BLL.Service.Implementations
                     };
                     await _repository.CreateAsync(prod);
                     _logger.LogInformation($"[ProductService.CreateAsync] создан новый продукт {prod.ProductName}");
-                }
             }
             catch (Exception ex)
             {
