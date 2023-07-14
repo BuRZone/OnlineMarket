@@ -14,7 +14,7 @@ namespace OnlineMarket.Controllers
         {
             _productService = productService;
             _categoryService = categoryService;
-            
+  
         }
         public IActionResult Index()
         {
@@ -28,16 +28,16 @@ namespace OnlineMarket.Controllers
 
         public async Task <IActionResult> Create()
         {
+            ProductVM productVM = new ProductVM();
             var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName}).ToListAsync();
 
             ViewData["Category"] =  new SelectList(category, "Id", "CategoryName");
-            return View();
+            return View(productVM);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(ProductVM product, byte[]? imageData)
         {
-
                 using (var binaryReader = new BinaryReader(product.ProductformFile.OpenReadStream()))
                 {
                     imageData = binaryReader.ReadBytes((int)product.ProductformFile.Length);
@@ -47,7 +47,6 @@ namespace OnlineMarket.Controllers
 
                 await _productService.CreateAsync(product);
                 return RedirectToAction("Index", "Home");
-
 
         }
 
