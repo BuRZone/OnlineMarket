@@ -28,7 +28,8 @@ namespace OnlineMarket.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            CategoryVM categoryVM = new CategoryVM();
+            return View(categoryVM);
         }
 
         [HttpPost]
@@ -58,7 +59,6 @@ namespace OnlineMarket.Controllers
             await _categoryService.Delete(id);
             return RedirectToAction("GetCategory");
         }
-
 
         public async Task<IActionResult> GetAll(int Id)
         {
