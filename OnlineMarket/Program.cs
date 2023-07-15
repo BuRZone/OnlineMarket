@@ -7,12 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddDbContext<ApplicationDbContext>(); //подключение к ДБ в самом классе ApplicationDbContext
 
 //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddSqlServer<ApplicationDbContext>(connectionString);
 
-//builder.Services.AddSingleton(new MongoClient("mongodb://localhost:27017"));
+//builder.Services.AddSingleton(new MongoClient("mongodb://localhost:27017")); // подключение к MongoDb
 
 builder.Services.InitializeRepositories();
 builder.Services.InitializeServices();
