@@ -6,9 +6,9 @@ namespace OnlineMarket.DAL.SQLRepositories
     public class CategoryRepository : IBaseRepository<Category>
     {
         private readonly ApplicationDbContext _context;
-        public CategoryRepository(ApplicationDbContext context)
+        public CategoryRepository()
         {
-            _context = context;      
+            _context = new ApplicationDbContext();
         }
         public async Task CreateAsync(Category entity)
         {

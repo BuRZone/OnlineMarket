@@ -6,9 +6,9 @@ namespace OnlineMarket.DAL.SQLRepositories
     public class UserRepository : IBaseRepository<User>
     {
         private readonly ApplicationDbContext _context;
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
         public async Task CreateAsync(User user)
         {

@@ -6,9 +6,9 @@ namespace OnlineMarket.DAL.SQLRepositories
     public class SellerRepository : IBaseRepository<Seller>
     {
         private readonly ApplicationDbContext _context;
-        public SellerRepository(ApplicationDbContext context)
+        public SellerRepository()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
         public async Task CreateAsync(Seller seller)
         {

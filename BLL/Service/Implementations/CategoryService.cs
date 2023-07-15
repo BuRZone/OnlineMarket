@@ -4,7 +4,7 @@ using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
-
+using OnlineMarket.DAL.SQLRepositories;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
@@ -13,10 +13,10 @@ namespace OnlineMarket.BLL.Service.Implementations
         private readonly ILogger<UserService> _logger;
         private readonly IBaseRepository<Category> _repository;
 
-        public CategoryService(ILogger<UserService> logger, IBaseRepository<Category> repository)
+        public CategoryService(ILogger<UserService> logger)
         {
             _logger = logger;
-            _repository = repository;
+            _repository = new CategoryRepository();
         }
 
         public async Task CreateAsync(CategoryVM category)

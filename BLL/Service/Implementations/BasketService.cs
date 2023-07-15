@@ -1,15 +1,16 @@
 ﻿using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
+using OnlineMarket.DAL.SQLRepositories;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
     public class BasketService : IBasketService
     {
         private readonly IBaseRepository<Basket> _repository;
-        public BasketService(IBaseRepository<Basket> repository)
+        public BasketService()
         {
-            _repository = repository;
+            _repository = new BasketRepository();
         }
        
 

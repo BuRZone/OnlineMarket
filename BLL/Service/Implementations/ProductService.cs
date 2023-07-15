@@ -4,6 +4,7 @@ using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
+using OnlineMarket.DAL.SQLRepositories;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
@@ -12,10 +13,10 @@ namespace OnlineMarket.BLL.Service.Implementations
         private readonly ILogger<ProductService> _logger;
         private readonly IBaseRepository<Product> _repository;
 
-        public ProductService(ILogger<ProductService> logger, IBaseRepository<Product> repository)
+        public ProductService(ILogger<ProductService> logger)
         {
             _logger = logger;
-            _repository = repository;
+            _repository = new ProductRepository();
         }
         public async Task CreateAsync(ProductVM product)
         {

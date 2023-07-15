@@ -6,9 +6,9 @@ namespace OnlineMarket.DAL.SQLRepositories
     public class ProductRepository : IBaseRepository<Product>
     {
         private readonly ApplicationDbContext _context;
-        public ProductRepository(ApplicationDbContext context)
+        public ProductRepository()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
         public async Task CreateAsync(Product product)
         {

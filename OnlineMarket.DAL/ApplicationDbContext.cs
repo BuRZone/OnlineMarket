@@ -1,14 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineMarket.DAL.Entity;
 using System.Net.Http.Headers;
+using System.Reflection;
 
 namespace OnlineMarket.DAL
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base (options) 
+        public ApplicationDbContext() 
         {
-
+             
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -17,6 +18,11 @@ namespace OnlineMarket.DAL
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Payment> Payments { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=OnlineMarketDb;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
