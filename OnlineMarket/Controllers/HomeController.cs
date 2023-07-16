@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.Models;
 using System.Diagnostics;
@@ -15,10 +17,29 @@ namespace OnlineMarket.Controllers
             _productService = productService;
             _categoryService = categoryService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var productList = new List<Product>(_productService.GetAsync());
-            return View(productList);
+            
+            List<ProductVM> productVMList = new List<ProductVM>();
+            var productList = await _productService.GetAsync().ToListAsync();
+            if (productList == null)
+            {
+                return NotFound();
+            }
+            foreach (var product in productList) 
+            {
+                ProductVM productVM = new ProductVM();
+                productVM.ProductName = product.ProductName;
+                productVM.ProductDescription = product.ProductDescription;
+                productVM.Price = product.Price;
+                productVM.ProductPhoto = product.ProductPhoto;
+                productVM.CategoryId = product.CategoryId;
+                productVM.Id = product.Id;
+                productVM.Quantity = product.Quantity;
+                productVMList.Add(productVM);
+            }
+
+            return View(productVMList);
         }
 
 

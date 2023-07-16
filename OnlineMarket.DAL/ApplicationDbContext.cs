@@ -55,9 +55,10 @@ namespace OnlineMarket.DAL
                 builder.HasData(new User()
                 {
                     Id = 1,
-                    UserName = "Mike",
+                    UserName = "Mike@testmail.com",
                     Role = Enum.Role.Admin,
-                    Password = "123456"  
+                    Password = "123456",
+                    BasketId = 1
                 });
             });
             modelBuilder.Entity<Basket>(builder =>

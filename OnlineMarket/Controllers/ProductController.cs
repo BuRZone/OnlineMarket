@@ -22,8 +22,26 @@ namespace OnlineMarket.Controllers
         }
         public async Task<IActionResult> GetProduct()
         {
+            List<ProductVM> productVMList = new List<ProductVM>();
             var productList = await _productService.GetAsync().ToListAsync();
-            return View(productList);
+            if (productList == null)
+            {
+                return NotFound();
+            }
+            foreach (var product in productList)
+            {
+                ProductVM productVM = new ProductVM();
+                productVM.ProductName = product.ProductName;
+                productVM.ProductDescription = product.ProductDescription;
+                productVM.Price = product.Price;
+                productVM.ProductPhoto = product.ProductPhoto;
+                productVM.CategoryId = product.CategoryId;
+                productVM.Id = product.Id;
+                productVM.Quantity = product.Quantity;
+                productVMList.Add(productVM);
+            }
+
+            return View(productVMList);
         }
 
         public async Task <IActionResult> Create()

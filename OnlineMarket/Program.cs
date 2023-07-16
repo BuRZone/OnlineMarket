@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext>(); //подключение к ДБ в самом классе ApplicationDbContext
+builder.Services.AddDbContext<ApplicationDbContext>(); //подключение к БД в самом классе ApplicationDbContext
 
 //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddSqlServer<ApplicationDbContext>(connectionString);
