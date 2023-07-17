@@ -11,9 +11,9 @@ namespace OnlineMarket.DAL.SQLRepositories
     public class BasketRepository : IBaseRepository<Basket>
     {
         private readonly ApplicationDbContext _context;
-        public BasketRepository()
+        public BasketRepository(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
         public async Task CreateAsync(Basket entity)
         {

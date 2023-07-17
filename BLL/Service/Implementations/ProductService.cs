@@ -13,10 +13,10 @@ namespace OnlineMarket.BLL.Service.Implementations
         private readonly ILogger<ProductService> _logger;
         private readonly IBaseRepository<Product> _repository;
 
-        public ProductService(ILogger<ProductService> logger)
+        public ProductService(ILogger<ProductService> logger, IBaseRepository<Product> repository)
         {
             _logger = logger;
-            _repository = new ProductRepository();
+            _repository = repository;
         }
         public async Task CreateAsync(ProductVM product)
         {

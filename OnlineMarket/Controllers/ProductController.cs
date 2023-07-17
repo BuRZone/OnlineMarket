@@ -44,28 +44,47 @@ namespace OnlineMarket.Controllers
             return View(productVMList);
         }
 
+
         public async Task <IActionResult> Create()
         {
             ProductVM productVM = new ProductVM();
             var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName}).ToListAsync();
 
             ViewData["Category"] =  new SelectList(category, "Id", "CategoryName");
+
             return View(productVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductVM product, byte[]? imageData)
+        public async Task<IActionResult> Create(ProductVM productVM, byte[]? imageData)
         {
-                using (var binaryReader = new BinaryReader(product.ProductformFile.OpenReadStream()))
+            var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).ToListAsync();
+
+            ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
+
+            if (productVM.Price == default )
+            {
+                ModelState.AddModelError("Price","укажите стомость");
+                
+            }
+            if (productVM.Quantity == default)
+            {
+                ModelState.AddModelError("Quantity", "укажите количество");
+            }
+            if (ModelState.IsValid)
+            {
+                using (var binaryReader = new BinaryReader(productVM.ProductformFile.OpenReadStream()))
                 {
-                    imageData = binaryReader.ReadBytes((int)product.ProductformFile.Length);
+                    imageData = binaryReader.ReadBytes((int)productVM.ProductformFile.Length);
                 }
 
-                product.ProductPhoto = imageData;
+                productVM.ProductPhoto = imageData;
 
-                await _productService.CreateAsync(product);
+                await _productService.CreateAsync(productVM);
                 return RedirectToAction("Index", "Home");
+            }
 
+            return View();
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -79,7 +98,16 @@ namespace OnlineMarket.Controllers
             {
                 return NotFound();
             }
-            return View(product);
+            ProductVM productVM = new ProductVM();
+            productVM.ProductName = product.ProductName;
+            productVM.ProductDescription = product.ProductDescription;
+            productVM.Price = product.Price;
+            productVM.ProductPhoto = product.ProductPhoto;
+            productVM.CategoryId = product.CategoryId;
+            productVM.Id = product.Id;
+            productVM.Quantity = product.Quantity;
+
+            return View(productVM);
         }
 
         [HttpPost]

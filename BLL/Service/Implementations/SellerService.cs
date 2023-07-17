@@ -10,13 +10,13 @@ namespace OnlineMarket.BLL.Service.Implementations
 {
     public class SellerService : ISellerService
     {
-        private readonly ILogger<Seller> _logger;
+        private readonly ILogger<SellerService> _logger;
         private readonly IBaseRepository<Seller> _repository;
 
-        public SellerService(ILogger<Seller> logger)
+        public SellerService(ILogger<SellerService> logger, IBaseRepository<Seller> repository)
         {
             _logger = logger;
-            _repository = new SellerRepository();
+            _repository = repository;
         }
         public async Task CreateAsync(SellerVM seller)
         {

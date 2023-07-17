@@ -6,11 +6,12 @@
 
 <form asp-action="Create" method="post">
 
-    <div asp-validation-summary="All" style="font-size:23px; font-family:Impact, serif" class="text-danger text-center"></div>
+    <div asp-validation-summary="ModelOnly" style="font-size:23px; font-family:Impact, serif" class="text-danger text-center"></div>
     <div class="row">
         <div class="form-group col-md-4">
             <label asp-for="@Model.CategoryName" class="col-form-label"></label>
             <input type="text" class="form-control" asp-for="@Model.CategoryName">
+            <span asp-validation-for="@Model.CategoryName" class="text-danger"></span>
         </div>
     </div>
     <button class="btn btn-primary">Отправить</button>

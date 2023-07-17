@@ -12,13 +12,13 @@ namespace OnlineMarket.BLL.Service.Implementations
 {
     public class UserService : IUserService
     {
-        private readonly ILogger<User> _logger;
+        private readonly ILogger<UserService> _logger;
         private readonly IBaseRepository<User> _repository;
 
-        public UserService(ILogger<User> logger)
+        public UserService(ILogger<UserService> logger, IBaseRepository<User> repository)
         {
             _logger = logger;
-            _repository = new UserRepository();
+            _repository = repository;
         }
         public async Task CreateAsync(UserVM user)
         {

@@ -1,22 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
+using OnlineMarket.DAL.MongoRepositories;
 using OnlineMarket.DAL.SQLRepositories;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ILogger<UserService> _logger;
+        private readonly ILogger<CategoryService> _logger;
         private readonly IBaseRepository<Category> _repository;
 
-        public CategoryService(ILogger<UserService> logger)
+        public CategoryService(ILogger<CategoryService> logger, IBaseRepository<Category> repository)
         {
             _logger = logger;
-            _repository = new CategoryRepository();
+            _repository = repository;
         }
 
         public async Task CreateAsync(CategoryVM category)
