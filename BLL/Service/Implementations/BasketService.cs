@@ -17,7 +17,6 @@ namespace OnlineMarket.BLL.Service.Implementations
             _repository = repository;
         }
        
-
         public IQueryable<Basket> GetAsync()
         {
 

@@ -8,7 +8,7 @@ namespace OnlineMarket
 {
     public static class Initializer
     {
-        public static void InitializeRepositories(this IServiceCollection services)
+        public static IServiceCollection InitializeRepositories(this IServiceCollection services)
         {
             services.AddScoped<IBaseRepository<Category>, CategoryRepository>();
             services.AddScoped<IBaseRepository<User>, UserRepository>();
@@ -16,9 +16,10 @@ namespace OnlineMarket
             services.AddScoped<IBaseRepository<Product>, ProductRepository>();
             services.AddScoped<IBaseRepository<Basket>, BasketRepository>();
             //services.AddScoped<IBaseRepository<Order>, OrderRepository>();
+            return services;
         }
 
-        public static void InitializeServices(this IServiceCollection services)
+        public static IServiceCollection InitializeServices(this IServiceCollection services)
         {
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
@@ -26,6 +27,7 @@ namespace OnlineMarket
             services.AddScoped<ISellerService, SellerService>();
             services.AddScoped<IBasketService, BasketService>();
             //services.AddScoped<IOrderService, OrderService>();
+            return services;
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
+using OnlineMarket.DAL.Interfaces;
+using ZstdSharp.Unsafe;
 
 namespace OnlineMarket.Controllers
 {
@@ -14,7 +17,6 @@ namespace OnlineMarket.Controllers
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService; 
-
         }
         public IActionResult Index()
         {
@@ -23,8 +25,8 @@ namespace OnlineMarket.Controllers
 
         public async Task<IActionResult> GetCategory() 
         {
-            List<CategoryVM> categoryVMList = new List<CategoryVM>();
-            var categoryList = await _categoryService.GetAsync().ToListAsync();
+            var categoryVMList = new List<CategoryVM>();
+            var categoryList = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName}).AsNoTracking().ToListAsync();
             if (categoryList == null)
             {
                 return NotFound();
@@ -40,9 +42,13 @@ namespace OnlineMarket.Controllers
             return View(categoryVMList);
         }
 
-        public IActionResult Create()
+        public async Task <IActionResult> Create()
         {
             CategoryVM categoryVM = new CategoryVM();
+            var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).OrderBy(x => x.CategoryName).ToListAsync();
+
+            ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
+
             return View(categoryVM);
         }
 
@@ -85,7 +91,8 @@ namespace OnlineMarket.Controllers
             {
                 return NotFound();
             }
-            List<ProductVM> productVMList = new List<ProductVM>();
+            var productVMList = new List<ProductVM>();
+            
             foreach (var product in cat.Product)
             {
                 ProductVM productVM = new ProductVM();
@@ -98,7 +105,7 @@ namespace OnlineMarket.Controllers
                 productVM.Quantity = product.Quantity;
                 productVMList.Add(productVM);
             }
-
+            
             CategoryVM categoryVM = new CategoryVM();
             categoryVM.Id = cat.Id;
             categoryVM.CategoryName = cat.CategoryName;

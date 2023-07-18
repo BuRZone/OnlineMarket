@@ -20,7 +20,6 @@ namespace OnlineMarket.BLL.Service.Implementations
             _logger = logger;
             _repository = repository;
         }
-
         public async Task CreateAsync(CategoryVM category)
         {
             try
@@ -63,7 +62,7 @@ namespace OnlineMarket.BLL.Service.Implementations
 
         public IQueryable<Category> GetAsync()
         {
-             
+            
             return _repository.GetAsync();
         }
 
@@ -84,5 +83,6 @@ namespace OnlineMarket.BLL.Service.Implementations
                 _logger.LogError(ex, $"[CategoryService.UpdateAsync] error: {ex.Message}");
             }
         }
+
     }
 }

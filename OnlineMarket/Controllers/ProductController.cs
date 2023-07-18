@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Product;
@@ -14,7 +15,6 @@ namespace OnlineMarket.Controllers
         {
             _productService = productService;
             _categoryService = categoryService;
-  
         }
         public IActionResult Index()
         {
@@ -48,9 +48,9 @@ namespace OnlineMarket.Controllers
         public async Task <IActionResult> Create()
         {
             ProductVM productVM = new ProductVM();
-            var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName}).ToListAsync();
+            var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).ToListAsync();
 
-            ViewData["Category"] =  new SelectList(category, "Id", "CategoryName");
+            ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
 
             return View(productVM);
         }

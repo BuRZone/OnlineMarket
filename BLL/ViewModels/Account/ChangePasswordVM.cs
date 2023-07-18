@@ -10,7 +10,7 @@ namespace OnlineMarket.BLL.ViewModels.Account
         [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
-        [MinLength(6, ErrorMessage = "Пароль должен быть больше или равен 5 символов")]
+        [MinLength(6, ErrorMessage = "Пароль должен быть больше или равен 6 символов")]
         public string NewPassword { get; set; }
     }
 }

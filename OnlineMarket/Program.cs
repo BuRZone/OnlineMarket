@@ -1,12 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Driver;
 using OnlineMarket;
 using OnlineMarket.DAL;
-using OnlineMarket.DAL.Entity;
-using OnlineMarket.DAL.Interfaces;
-using OnlineMarket.DAL.MongoRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +43,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
 
 app.UseAuthentication();
 app.UseAuthorization();
