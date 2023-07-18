@@ -7,6 +7,7 @@ namespace OnlineMarket.BLL.ViewModels.Account
         [Required(ErrorMessage = "Укажите имя")]
         [MaxLength(20, ErrorMessage = "Имя должно иметь длину меньше 20 символов")]
         [MinLength(3, ErrorMessage = "Имя должно иметь длину больше 3 символов")]
+        [EmailAddress]
         public string UserName { get; set; }
 
         [DataType(DataType.Password)]

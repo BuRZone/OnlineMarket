@@ -40,7 +40,8 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label class="col-form-label">Изображение</label>
-            <input asp-for="@Model.ProductformFile" class="form-control" type="file" accept="image/jpeg, image/png">    
+            <input asp-for="@Model.ProductformFile" class="form-control" type="file" accept="image/jpeg, image/png">
+            <span asp-validation-for="@Model.ProductformFile" class="text-danger"></span>
         </div>
     </div>
     <p></p>

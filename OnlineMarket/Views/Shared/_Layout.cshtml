@@ -45,10 +45,22 @@
                             </div>
                         </li>
                     </ul>
-                    <div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" asp-controller="Account" asp-action="Logout" class="nav-link">
+                            <button type="submit" style="background-color:unset;border:none;">
+                            <i class="bi bi-person" style="font-size: 2.5em;padding-left:0.05em"></i>
+                            <p style="margin-top:-0.9em;">Logout</p>
+                            </button>
+                        </form> 
+                    }
+                    else
+                    {
+                    <div><a asp-controller="Account" asp-action="Login" class="nav-link"> 
                         <i class="bi bi-person" style="font-size: 2.5em; margin-right:0.30em"></i>
-                        <p style="margin-top:-0.9em;">Login</p>
+                        <p style="margin-top:-0.9em;">Login</p></a>
                     </div>
+                    }
                     <div>
                         <i class="bi bi-cart4" style="font-size: 2.5em;" ></i>
                         <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
@@ -64,7 +76,7 @@
             </form>
         </nav>
         <nav class="navbar navbar-expand-lg bg-primary"
-             style="border-radius: 25px 25px 0 0;background:linear-gradient(90deg,#34b6e2, #5f62b0,#db307d);margin-top: -28px;"
+             style="border-radius: 25px 25px 0 0; background:linear-gradient(90deg,#34b6e2, #5f62b0,#db307d);margin-top: -28px;"
                     data-bs-theme="dark">
         </nav>
     </header>

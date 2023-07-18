@@ -52,8 +52,7 @@ namespace OnlineMarket.DAL
                     Id = 1,
                     UserName = "Mike@testmail.com",
                     Role = Enum.Role.Admin,
-                    Password = "123456",
-                    BasketId = 1
+                    Password = "123456"
                 });
             });
             modelBuilder.Entity<Basket>(builder =>

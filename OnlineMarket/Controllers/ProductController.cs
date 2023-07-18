@@ -58,6 +58,7 @@ namespace OnlineMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductVM productVM, byte[]? imageData)
         {
+            ProductVM prod = new ProductVM();
             var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).ToListAsync();
 
             ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
@@ -84,7 +85,7 @@ namespace OnlineMarket.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            return View(prod);
         }
 
         public async Task<IActionResult> Delete(int? id)

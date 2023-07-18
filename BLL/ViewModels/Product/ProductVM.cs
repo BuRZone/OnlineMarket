@@ -10,20 +10,21 @@ namespace OnlineMarket.BLL.ViewModels.Product
         public int Id { get; set; }
         [Display(Name = "Название товара")]
         [Required(ErrorMessage = "Введите название товара")]
-        public string ProductName { get; set; }
+        public string? ProductName { get; set; }
         [Display(Name = "Описание товара")]
         [Required(ErrorMessage = "Введите описание товара")]
-        public string ProductDescription { get; set; }
+        public string? ProductDescription { get; set; }
 
         [Display(Name = "Стоимость")]
         [Required(ErrorMessage = "Укажите стоимость")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         [Display(Name = "Количество")]
         [Required(ErrorMessage = "Укажите количество")]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
         [Display(Name = "категория")]
         [Required(ErrorMessage = "Укажите категорию")]
         public int? CategoryId { get; set; }
+        [Required(ErrorMessage = "загрузите фотографии")]
         public IFormFile? ProductformFile { get; set; }
         public byte[]? ProductPhoto { get; set; }
     }

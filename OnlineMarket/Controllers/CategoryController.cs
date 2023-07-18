@@ -6,6 +6,7 @@ using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using ZstdSharp.Unsafe;
 
 namespace OnlineMarket.Controllers
@@ -55,12 +56,17 @@ namespace OnlineMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CategoryVM category) 
         {
+            CategoryVM categoryVM = new CategoryVM();
+            var categoryList = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).OrderBy(x => x.CategoryName).ToListAsync();
+
+            ViewData["Category"] = new SelectList(categoryList, "Id", "CategoryName");
+
             if (ModelState.IsValid)
             {
                 await _categoryService.CreateAsync(category);
                 return RedirectToAction("GetCategory");
             }
-            return View();
+            return View(categoryVM);
         }
 
         public async Task <IActionResult> Delete(int? id) 

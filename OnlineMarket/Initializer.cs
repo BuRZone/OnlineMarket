@@ -26,6 +26,7 @@ namespace OnlineMarket
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISellerService, SellerService>();
             services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IAccountService, AccountService>();
             //services.AddScoped<IOrderService, OrderService>();
             return services;
         }
