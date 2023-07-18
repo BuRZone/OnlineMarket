@@ -1,0 +1,26 @@
+﻿@using OnlineMarket.BLL.ViewModels.Product;
+@model List<ProductVM>
+
+    <p>Product in Cart</p>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Product;
+using OnlineMarket.DAL.Entity;
 
 namespace OnlineMarket.Controllers
 {

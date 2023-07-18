@@ -34,7 +34,6 @@ namespace OnlineMarket.BLL.Service.Implementations
                     };
                     await _repository.CreateAsync(cat);
 
-                    Console.ForegroundColor = ConsoleColor.Green;
                     _logger.LogInformation($"[CategoryService.CreateAsync] создана новая категория {cat.CategoryName}");
                 }
             }

@@ -13,5 +13,6 @@ namespace OnlineMarket.BLL.ViewModels.Account
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
+
     }
 }

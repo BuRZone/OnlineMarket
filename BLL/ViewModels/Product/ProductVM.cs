@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using OnlineMarket.BLL.ViewModels.Basket;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -27,5 +28,6 @@ namespace OnlineMarket.BLL.ViewModels.Product
         [Required(ErrorMessage = "загрузите фотографии")]
         public IFormFile? ProductformFile { get; set; }
         public byte[]? ProductPhoto { get; set; }
+
     }
 }

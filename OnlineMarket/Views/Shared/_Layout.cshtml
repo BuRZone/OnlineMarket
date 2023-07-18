@@ -61,9 +61,10 @@
                         <p style="margin-top:-0.9em;">Login</p></a>
                     </div>
                     }
-                    <div>
+                    <div><a asp-controller="Basket" asp-action="Get" asp-route-User.Identity="@User." class="nav-link">
                         <i class="bi bi-cart4" style="font-size: 2.5em;" ></i>
-                        <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
+                            <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
+                        </a>
                     </div>
                 </div>
             </div>
