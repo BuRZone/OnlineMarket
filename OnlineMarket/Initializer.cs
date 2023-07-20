@@ -15,7 +15,7 @@ namespace OnlineMarket
             services.AddScoped<IBaseRepository<Seller>, SellerRepository>();
             services.AddScoped<IBaseRepository<Product>, ProductRepository>();
             services.AddScoped<IBaseRepository<Basket>, BasketRepository>();
-            //services.AddScoped<IBaseRepository<Order>, OrderRepository>();
+            services.AddScoped<IBaseRepository<Order>, OrderRepository>();
             return services;
         }
 
@@ -27,7 +27,7 @@ namespace OnlineMarket
             services.AddScoped<ISellerService, SellerService>();
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IAccountService, AccountService>();
-            //services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderService, OrderService>();
             return services;
         }
     }

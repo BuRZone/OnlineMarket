@@ -2,7 +2,7 @@
 
 namespace OnlineMarket.BLL.ViewModels.Order
 {
-    internal class CreateOrderVM
+    public class CreateOrderVM
     {
         public int Id { get; set; }
 

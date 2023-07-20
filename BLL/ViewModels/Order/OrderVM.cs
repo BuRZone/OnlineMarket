@@ -1,21 +1,17 @@
-﻿namespace OnlineMarket.BLL.ViewModels.Order
+﻿using OnlineMarket.BLL.ViewModels.Basket;
+using OnlineMarket.BLL.ViewModels.Product;
+
+namespace OnlineMarket.BLL.ViewModels.Order
 {
-    internal class OrderVM
+    public class OrderVM
     {
         public int Id { get; set; }
 
-        public string ProductName { get; set; }
+        public DateTime DateCreated { get; set; }
 
-        public byte[]? ProductPhoto { get; set; }
-
-        public string Address { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string MiddleName { get; set; }
-
-        public string DateCreate { get; set; }
+        public int ProductVMId { get; set; }
+        public ProductVM Product { get; set; }
+        public int BasketVMId { get; set; }
+        public BasketVM Basket { get; set; }
     }
 }

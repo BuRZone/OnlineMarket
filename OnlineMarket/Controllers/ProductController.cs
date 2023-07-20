@@ -1,10 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Amazon.Auth.AccessControlPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using OnlineMarket.BLL.Service.Implementations;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Basket;
 using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
+using OnlineMarket.Models;
+using System.Security.Claims;
+using System.Security.Cryptography.Xml;
+using System.Security.Principal;
 
 namespace OnlineMarket.Controllers
 {
@@ -12,10 +20,12 @@ namespace OnlineMarket.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
-        public ProductController(IProductService productService, ICategoryService categoryService)
+        private readonly IBasketService _basketService;
+        public ProductController(IProductService productService, ICategoryService categoryService, IBasketService basketService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _basketService = basketService;
         }
         public IActionResult Index()
         {
@@ -118,5 +128,6 @@ namespace OnlineMarket.Controllers
             await _productService.Delete(id);
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

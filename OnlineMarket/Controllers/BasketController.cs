@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OnlineMarket.BLL.Service.Implementations;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Basket;
+using OnlineMarket.BLL.ViewModels.Order;
 using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
 
@@ -9,38 +12,103 @@ namespace OnlineMarket.Controllers
     public class BasketController : Controller
     {
         private readonly IBasketService _basketService;
-        public BasketController(IBasketService basketService)
+        private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
+        public BasketController(IBasketService basketService, IProductService productService, IOrderService orderService)
         {
             _basketService = basketService;
-            
+            _productService = productService;
+            _orderService = orderService;
+
         }
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> AddToCart(int? id)
         {
-            List<ProductVM> productList = new List<ProductVM>();
 
-
-            var productQ = await _basketService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(x => x.Id == id);
-
-            if (productQ != null)
+            var productQ = await _productService.GetAsync().FirstOrDefaultAsync(x => x.Id == id);
+            if (productQ == null)
             {
-                foreach (var product in productQ.Product)
-                {
-                    ProductVM productVM = new ProductVM()
-                    {
-                        Id = product.Id,
-                        ProductName = product.ProductName,
-                        ProductDescription = product.ProductDescription,
-                        Price = product.Price,
-                        Quantity = product.Quantity,
-                        ProductPhoto = product.ProductPhoto,
-                        CategoryId = product.CategoryId
-                    };
-                    productList.Add(productVM);
-                }
-
-                return View(productList);
+                return NotFound();
             }
-            return View(productList);
+            ProductVM productVM = new ProductVM();
+            productVM.ProductName = productQ.ProductName;
+            productVM.ProductDescription = productQ.ProductDescription;
+            productVM.Price = productQ.Price;
+            productVM.ProductPhoto = productQ.ProductPhoto;
+            productVM.CategoryId = productQ.CategoryId;
+            productVM.Id = productQ.Id;
+            productVM.Quantity = productQ.Quantity;
+
+
+            var basketQ = await _basketService.GetAsync().Include(x => x.User).FirstOrDefaultAsync(x => x.User.UserName == User.Identity.Name);
+            OrderVM orderVM = new OrderVM()
+            {
+                ProductVMId = productVM.Id,
+                BasketVMId = basketQ.BasketId,
+                DateCreated = DateTime.Now
+            };
+            await _orderService.CreateAsync(orderVM);
+
+            return View(productVM);
         }
+
+
+        public async Task<IActionResult> Get()
+        {
+            var productVMList = new List<ProductVM>();
+
+            var basketQ = await _basketService.GetAsync().Include(x => x.Order).ThenInclude(x => x.Product).
+                FirstOrDefaultAsync(x => x.User.UserName == User.Identity.Name);
+            var productQ = basketQ.Order.Select(x => x.Product);
+           
+
+            foreach(var product in productQ)
+            {
+
+                ProductVM productVM = new ProductVM();
+                productVM.ProductName = product.ProductName;
+                productVM.ProductDescription = product.ProductDescription;
+                productVM.Price = product.Price;
+                productVM.ProductPhoto = product.ProductPhoto;
+                productVM.CategoryId = product.CategoryId;
+                productVM.Id = product.Id;
+                productVM.Quantity = product.Quantity;
+                productVMList.Add(productVM);
+            }
+
+            return View(productVMList);
+
+
+        }
+
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var product = await _productService.GetAsync().FirstOrDefaultAsync(m => m.Id == id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    ProductVM productVM = new ProductVM()
+        //    {
+        //        Id = product.Id,
+        //        ProductName = product.ProductName,
+        //        ProductDescription = product.ProductDescription,
+        //        Price = product.Price,
+        //        Quantity = 10 - product.Quantity,
+        //        ProductPhoto = product.ProductPhoto,
+        //        CategoryId = product.CategoryId
+        //    };
+        //    return View(productVM);
+        //}
+
+        ////[HttpPost]
+        ////public async Task<IActionResult> Delete(int id)
+        ////{
+        ////    _basketService. 
+        ////}
+
     }
 }

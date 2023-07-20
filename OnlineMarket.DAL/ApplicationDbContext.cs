@@ -37,7 +37,7 @@ namespace OnlineMarket.DAL
             {
                 builder.ToTable(nameof(Product)).HasKey(p => p.Id);
                 builder.HasOne(p => p.Category);
-                builder.HasMany(p => p.Seller);
+                builder.HasOne(p => p.Seller);
             });
             modelBuilder.Entity<Seller>().ToTable(nameof(Seller));
 
@@ -47,20 +47,12 @@ namespace OnlineMarket.DAL
                 builder.ToTable(nameof(User)).HasKey(p => p.Id);
                 builder.HasOne(p => p.Basket).WithOne(p => p.User).
                 HasPrincipalKey<User>(p => p.Id).OnDelete(DeleteBehavior.Cascade);
-                builder.HasData(new User()
-                {
-                    Id = 1,
-                    UserName = "Mike@testmail.com",
-                    Role = Enum.Role.Admin,
-                    Password = "123456"
-                });
             });
             modelBuilder.Entity<Basket>(builder =>
             {
-                builder.ToTable(nameof(Basket)).HasKey(p => p.Id);
+                builder.ToTable(nameof(Basket)).HasKey(p => p.BasketId);
                 builder.HasOne(p => p.User);
-                builder.HasMany(p => p.Product);
-                builder.HasData(new Basket() { Id = 1, UserId = 1 });
+                builder.HasMany(p => p.Order);
             });
             modelBuilder.Entity<Order>(builder =>
             {

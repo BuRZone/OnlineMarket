@@ -24,7 +24,7 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    <a asp-route-id="@item.Id" asp-controller="" asp-action="">Add to Cart</a>
+                    <a asp-route-id="@item.Id" asp-controller="Basket" asp-action="AddToCart">Add to Cart</a>
                 </td>
 
                 <td>

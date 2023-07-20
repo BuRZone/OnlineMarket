@@ -48,9 +48,13 @@ namespace OnlineMarket.BLL.Service.Implementations
                         UserId = user.Id
                     };
                     await _basketRepository.CreateAsync(basket);
+                    user.BasketId = basket.BasketId;
+                    await _userRepository.UpdateAsync(user);
+
+
                     var result = Authenticate(user);
-                    _logger.LogInformation($"[AccountService.Register] создан новый пользователь {user}");
-                    _logger.LogInformation($"[AccountService.Register] создана новая корзина {basket} для пользователя {user}");
+                    _logger.LogInformation($"[AccountService.Register] создан новый пользователь {user.UserName}");
+                    _logger.LogInformation($"[AccountService.Register] создана новая корзина {basket.BasketId} для пользователя {user.UserName}");
                     return result;
                 }
                 _logger.LogWarning($"[AccountService.Register] пользователь с таким UserName: {user.UserName} уже существует");
@@ -78,7 +82,7 @@ namespace OnlineMarket.BLL.Service.Implementations
                     return null;
                 }
                 var result = Authenticate(user);
-                _logger.LogInformation($"[AccountService.Register] пользователь: {user} вошел в систему");
+                _logger.LogInformation($"[AccountService.Login] пользователь: {user.UserName} вошел в систему");
 
                 return result;
             }

@@ -12,8 +12,8 @@ using OnlineMarket.DAL;
 namespace OnlineMarket.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230713182905_Remigration")]
-    partial class Remigration
+    [Migration("20230720162810_1mig")]
+    partial class _1mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,19 +42,16 @@ namespace OnlineMarket.DAL.Migrations
 
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Basket", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BasketId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BasketId"));
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("BasketId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -77,6 +74,23 @@ namespace OnlineMarket.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "одежда"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "автомобили"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "товары для животных"
+                        });
                 });
 
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Order", b =>
@@ -87,31 +101,21 @@ namespace OnlineMarket.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("BasketId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MiddleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BasketId");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
 
                     b.ToTable("Order", (string)null);
                 });
@@ -132,7 +136,7 @@ namespace OnlineMarket.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PaymentPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("SellerId")
                         .HasColumnType("int");
@@ -152,34 +156,32 @@ namespace OnlineMarket.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BasketId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("ProductDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("ProductPhoto")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SellerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BasketId");
-
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("SellerId");
 
                     b.ToTable("Product", (string)null);
                 });
@@ -224,6 +226,9 @@ namespace OnlineMarket.DAL.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("BasketId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -241,21 +246,6 @@ namespace OnlineMarket.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User", (string)null);
-                });
-
-            modelBuilder.Entity("ProductSeller", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SellerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "SellerId");
-
-                    b.HasIndex("SellerId");
-
-                    b.ToTable("ProductSeller");
                 });
 
             modelBuilder.Entity("CategorySeller", b =>
@@ -287,12 +277,20 @@ namespace OnlineMarket.DAL.Migrations
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Order", b =>
                 {
                     b.HasOne("OnlineMarket.DAL.Entity.Basket", "Basket")
-                        .WithMany()
+                        .WithMany("Order")
                         .HasForeignKey("BasketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OnlineMarket.DAL.Entity.Product", "Product")
+                        .WithOne("Order")
+                        .HasForeignKey("OnlineMarket.DAL.Entity.Order", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Basket");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Payment", b =>
@@ -308,17 +306,17 @@ namespace OnlineMarket.DAL.Migrations
 
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Product", b =>
                 {
-                    b.HasOne("OnlineMarket.DAL.Entity.Basket", null)
-                        .WithMany("Product")
-                        .HasForeignKey("BasketId");
-
                     b.HasOne("OnlineMarket.DAL.Entity.Category", "Category")
                         .WithMany("Product")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("OnlineMarket.DAL.Entity.Seller", "Seller")
+                        .WithMany("Product")
+                        .HasForeignKey("SellerId");
 
                     b.Navigation("Category");
+
+                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Seller", b =>
@@ -332,24 +330,9 @@ namespace OnlineMarket.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProductSeller", b =>
-                {
-                    b.HasOne("OnlineMarket.DAL.Entity.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineMarket.DAL.Entity.Seller", null)
-                        .WithMany()
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Basket", b =>
                 {
-                    b.Navigation("Product");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Category", b =>
@@ -357,9 +340,17 @@ namespace OnlineMarket.DAL.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("OnlineMarket.DAL.Entity.Product", b =>
+                {
+                    b.Navigation("Order")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("OnlineMarket.DAL.Entity.Seller", b =>
                 {
                     b.Navigation("Payment");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("OnlineMarket.DAL.Entity.User", b =>

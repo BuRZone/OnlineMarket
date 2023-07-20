@@ -12,6 +12,7 @@ namespace OnlineMarket.DAL.Entity
         public string Password { get; set; }
         public Role Role { get; set; } = Role.User;
         public decimal Balance { get; set; }
+        public int BasketId { get; set; }
         public Basket Basket { get; set; }
         public decimal Purchase { get; set; }
 

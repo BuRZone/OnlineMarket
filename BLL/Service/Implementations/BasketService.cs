@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Basket;
 using OnlineMarket.DAL;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
@@ -23,5 +25,17 @@ namespace OnlineMarket.BLL.Service.Implementations
             return _repository.GetAsync();
         }
 
+        public Task Update(AddToBasketVM toBasketVM)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public async Task Update(AddToBasketVM toBasketVM)
+        //{
+        //    var basket = await _repository.GetAsync().Include(p => p.Product).FirstOrDefaultAsync(x => x.Id == toBasketVM.BasketId);
+        //    basket.ProductId = toBasketVM.ProductId;
+
+        //    await _repository.UpdateAsync(basket);
+        //}
     }
 }

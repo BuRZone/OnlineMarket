@@ -7,6 +7,7 @@ namespace OnlineMarket.BLL.Service.Interfaces
     public interface IBasketService
     {
         IQueryable<Basket> GetAsync();
+        Task Update(AddToBasketVM toBasketVM); 
 
     }
 }
