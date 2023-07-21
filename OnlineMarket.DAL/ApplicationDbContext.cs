@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using OnlineMarket.DAL.Entity;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace OnlineMarket.DAL
 {
@@ -161,74 +164,64 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=88, CategoryId = 5, CategoryName =  "Хранение вещей"},
                     new SubCategory(){Id=89, CategoryId = 5, CategoryName =  "Цветы, вазы и кашпо"},
                     new SubCategory(){Id=90, CategoryId = 5, CategoryName =  "Шторы" },
-
-
-                    new SubCategory(){Id=90,  CategoryId = 6, CategoryName = "Аксессуары" },
-                    new SubCategory(){Id=91,  CategoryId = 6, CategoryName = "Волосы" },
-                    new SubCategory(){Id=92,  CategoryId = 6, CategoryName = "Аптечная косметика" },
-                    new SubCategory(){Id=93,  CategoryId = 6, CategoryName = "Детская декоративная косметика" },
-                    new SubCategory(){Id=94,  CategoryId = 6, CategoryName = "Для загара" },
-                    new SubCategory(){Id=95,  CategoryId = 6, CategoryName = "Для мам и малышей" },
-                    new SubCategory(){Id=96,  CategoryId = 6, CategoryName = "Израильская косметика" },
-                    new SubCategory(){Id=97,  CategoryId = 6, CategoryName = "Инструменты для парикмахеров" },
-                    new SubCategory(){Id=98,  CategoryId = 6, CategoryName = "Корейские бренды" },
-                    new SubCategory(){Id=99,  CategoryId = 6, CategoryName = "Косметические аппараты и аксессуары" },
-                    new SubCategory(){Id=100, CategoryId = 6, CategoryName = "Макияж" },
-                    new SubCategory(){Id=101, CategoryId = 6, CategoryName = "Мужская линия" },
-                    new SubCategory(){Id=102, CategoryId = 6, CategoryName = "Наборы для ухода" },
-                    new SubCategory(){Id=103, CategoryId = 6, CategoryName = "Ногти" },
-                    new SubCategory(){Id=104, CategoryId = 6, CategoryName = "Органическая косметика" },
-                    new SubCategory(){Id=105, CategoryId = 6, CategoryName = "Парфюмерия" },
-                    new SubCategory(){Id=106, CategoryId = 6, CategoryName = "Подарочные наборы" },
-                    new SubCategory(){Id=107, CategoryId = 6, CategoryName = "Профессиональная косметика" },
-                    new SubCategory(){Id=108, CategoryId = 6, CategoryName = "Средства личной гигиены" },
-                    new SubCategory(){Id=109, CategoryId = 6, CategoryName = "Гигиена полости рта" },
-                    new SubCategory(){Id=110, CategoryId = 6, CategoryName = "Уход за кожей" },
-
-
-                    new SubCategory(){Id=111, CategoryId = 7, CategoryName = "Аксессуары для волос"},
-                    new SubCategory(){Id=112, CategoryId = 7, CategoryName = "Аксессуары для одежды"},
-                    new SubCategory(){Id=113, CategoryId = 7, CategoryName = "Бижутерия"},
-                    new SubCategory(){Id=114, CategoryId = 7, CategoryName = "Веера"},
-                    new SubCategory(){Id=115, CategoryId = 7, CategoryName = "Галстуки и бабочки"},
-                    new SubCategory(){Id=116, CategoryId = 7, CategoryName = "Головные уборы"},
-                    new SubCategory(){Id=117, CategoryId = 7, CategoryName = "Зеркальца"},
-                    new SubCategory(){Id=118, CategoryId = 7, CategoryName = "Зонты"},
-                    new SubCategory(){Id=119, CategoryId = 7, CategoryName = "Кошельки и кредитницы"},
-                    new SubCategory(){Id=120, CategoryId = 7, CategoryName = "Маски для сна"},
-                    new SubCategory(){Id=121, CategoryId = 7, CategoryName = "Носовые платки"},
-                    new SubCategory(){Id=122, CategoryId = 7, CategoryName = "Очки и футляры"},
-                    new SubCategory(){Id=123, CategoryId = 7, CategoryName = "Перчатки и варежки"},
-                    new SubCategory(){Id=124, CategoryId = 7, CategoryName = "Платки и шарфы"},
-                    new SubCategory(){Id=125, CategoryId = 7, CategoryName = "Религиозные"},
-                    new SubCategory(){Id=126, CategoryId = 7, CategoryName = "Ремни и пояса"},
-                    new SubCategory(){Id=127, CategoryId = 7, CategoryName = "Сумки и рюкзаки"},
-                    new SubCategory(){Id=128, CategoryId = 7, CategoryName = "Часы и ремешки"},
-                    new SubCategory(){Id=129, CategoryId = 7, CategoryName = "Чемоданы и защита багажа" },
-
-
-
-                    new SubCategory(){Id=130, CategoryId = 8, CategoryName = "Автоэлектроника и навигация"},
-                    new SubCategory(){Id=131, CategoryId = 8, CategoryName = "Гарнитуры и наушники"},
-                    new SubCategory(){Id=132, CategoryId = 8, CategoryName = "Детская электроника"},
-                    new SubCategory(){Id=133, CategoryId = 8, CategoryName = "Игровые консоли и игры"},
-                    new SubCategory(){Id=134, CategoryId = 8, CategoryName = "Кабели и зарядные устройства"},
-                    new SubCategory(){Id=135, CategoryId = 8, CategoryName = "Музыка и видео"},
-                    new SubCategory(){Id=136, CategoryId = 8, CategoryName = "Ноутбуки и компьютеры"},
-                    new SubCategory(){Id=137, CategoryId = 8, CategoryName = "Офисная техника"},
-                    new SubCategory(){Id=138, CategoryId = 8, CategoryName = "Развлечения и гаджеты"},
-                    new SubCategory(){Id=139, CategoryId = 8, CategoryName = "Сетевое оборудование"},
-                    new SubCategory(){Id=140, CategoryId = 8, CategoryName = "Системы безопасности"},
-                    new SubCategory(){Id=141, CategoryId = 8, CategoryName = "Смартфоны и телефоны"},
-                    new SubCategory(){Id=142, CategoryId = 8, CategoryName = "Смарт-часы и браслеты"},
-                    new SubCategory(){Id=143, CategoryId = 8, CategoryName = "Солнечные электростанции и комплектующие"},
-                    new SubCategory(){Id=144, CategoryId = 8, CategoryName = "ТВ, Аудио, Фото, Видео техника"},
-                    new SubCategory(){Id=145, CategoryId = 8, CategoryName = "Торговое оборудование"},
-                    new SubCategory(){Id=146, CategoryId = 8, CategoryName = "Умный дом"},
-                    new SubCategory(){Id=147, CategoryId = 8, CategoryName = "Электротранспорт и аксессуары"},
-
-
-
+                    new SubCategory(){Id=91, CategoryId = 6, CategoryName = "Аксессуары" },
+                    new SubCategory(){Id=92, CategoryId = 6, CategoryName = "Волосы" },
+                    new SubCategory(){Id=93, CategoryId = 6, CategoryName = "Аптечная косметика" },
+                    new SubCategory(){Id=94, CategoryId = 6, CategoryName = "Детская декоративная косметика" },
+                    new SubCategory(){Id=95, CategoryId = 6, CategoryName = "Для загара" },
+                    new SubCategory(){Id=96, CategoryId = 6, CategoryName = "Для мам и малышей" },
+                    new SubCategory(){Id=97, CategoryId = 6, CategoryName = "Израильская косметика" },
+                    new SubCategory(){Id=98, CategoryId = 6, CategoryName = "Инструменты для парикмахеров" },
+                    new SubCategory(){Id=99, CategoryId = 6, CategoryName = "Корейские бренды" },
+                    new SubCategory(){Id=100, CategoryId = 6, CategoryName = "Косметические аппараты и аксессуары" },
+                    new SubCategory(){Id=101, CategoryId = 6, CategoryName = "Макияж" },
+                    new SubCategory(){Id=102, CategoryId = 6, CategoryName = "Мужская линия" },
+                    new SubCategory(){Id=103, CategoryId = 6, CategoryName = "Наборы для ухода" },
+                    new SubCategory(){Id=104, CategoryId = 6, CategoryName = "Ногти" },
+                    new SubCategory(){Id=105, CategoryId = 6, CategoryName = "Органическая косметика" },
+                    new SubCategory(){Id=106, CategoryId = 6, CategoryName = "Парфюмерия" },
+                    new SubCategory(){Id=107, CategoryId = 6, CategoryName = "Подарочные наборы" },
+                    new SubCategory(){Id=108, CategoryId = 6, CategoryName = "Профессиональная косметика" },
+                    new SubCategory(){Id=109, CategoryId = 6, CategoryName = "Средства личной гигиены" },
+                    new SubCategory(){Id=110, CategoryId = 6, CategoryName = "Гигиена полости рта" },
+                    new SubCategory(){Id=111, CategoryId = 6, CategoryName = "Уход за кожей" },
+                    new SubCategory(){Id=112, CategoryId = 7, CategoryName = "Аксессуары для волос"},
+                    new SubCategory(){Id=113, CategoryId = 7, CategoryName = "Аксессуары для одежды"},
+                    new SubCategory(){Id=114, CategoryId = 7, CategoryName = "Бижутерия"},
+                    new SubCategory(){Id=115, CategoryId = 7, CategoryName = "Веера"},
+                    new SubCategory(){Id=116, CategoryId = 7, CategoryName = "Галстуки и бабочки"},
+                    new SubCategory(){Id=117, CategoryId = 7, CategoryName = "Головные уборы"},
+                    new SubCategory(){Id=118, CategoryId = 7, CategoryName = "Зеркальца"},
+                    new SubCategory(){Id=119, CategoryId = 7, CategoryName = "Зонты"},
+                    new SubCategory(){Id=120, CategoryId = 7, CategoryName = "Кошельки и кредитницы"},
+                    new SubCategory(){Id=121, CategoryId = 7, CategoryName = "Маски для сна"},
+                    new SubCategory(){Id=122, CategoryId = 7, CategoryName = "Носовые платки"},
+                    new SubCategory(){Id=123, CategoryId = 7, CategoryName = "Очки и футляры"},
+                    new SubCategory(){Id=124, CategoryId = 7, CategoryName = "Перчатки и варежки"},
+                    new SubCategory(){Id=125, CategoryId = 7, CategoryName = "Платки и шарфы"},
+                    new SubCategory(){Id=126, CategoryId = 7, CategoryName = "Религиозные"},
+                    new SubCategory(){Id=127, CategoryId = 7, CategoryName = "Ремни и пояса"},
+                    new SubCategory(){Id=128, CategoryId = 7, CategoryName = "Сумки и рюкзаки"},
+                    new SubCategory(){Id=129, CategoryId = 7, CategoryName = "Часы и ремешки"},
+                    new SubCategory(){Id=130, CategoryId = 7, CategoryName = "Чемоданы и защита багажа" },
+                    new SubCategory(){Id=131, CategoryId = 8, CategoryName = "Автоэлектроника и навигация"},
+                    new SubCategory(){Id=132, CategoryId = 8, CategoryName = "Гарнитуры и наушники"},
+                    new SubCategory(){Id=133, CategoryId = 8, CategoryName = "Детская электроника"},
+                    new SubCategory(){Id=134, CategoryId = 8, CategoryName = "Игровые консоли и игры"},
+                    new SubCategory(){Id=135, CategoryId = 8, CategoryName = "Кабели и зарядные устройства"},
+                    new SubCategory(){Id=136, CategoryId = 8, CategoryName = "Музыка и видео"},
+                    new SubCategory(){Id=137, CategoryId = 8, CategoryName = "Ноутбуки и компьютеры"},
+                    new SubCategory(){Id=138, CategoryId = 8, CategoryName = "Офисная техника"},
+                    new SubCategory(){Id=139, CategoryId = 8, CategoryName = "Развлечения и гаджеты"},
+                    new SubCategory(){Id=140, CategoryId = 8, CategoryName = "Сетевое оборудование"},
+                    new SubCategory(){Id=141, CategoryId = 8, CategoryName = "Системы безопасности"},
+                    new SubCategory(){Id=142, CategoryId = 8, CategoryName = "Смартфоны и телефоны"},
+                    new SubCategory(){Id=143, CategoryId = 8, CategoryName = "Смарт-часы и браслеты"},
+                    new SubCategory(){Id=144, CategoryId = 8, CategoryName = "Солнечные электростанции и комплектующие"},
+                    new SubCategory(){Id=145, CategoryId = 8, CategoryName = "ТВ, Аудио, Фото, Видео техника"},
+                    new SubCategory(){Id=146, CategoryId = 8, CategoryName = "Торговое оборудование"},
+                    new SubCategory(){Id=147, CategoryId = 8, CategoryName = "Умный дом"},
+                    new SubCategory(){Id=148, CategoryId = 8, CategoryName = "Электротранспорт и аксессуары"},
                     new SubCategory(){Id=149, CategoryId = 9, CategoryName = "Антистресс" } ,
                     new SubCategory(){Id=150, CategoryId = 9, CategoryName = "Для малышей" } ,
                     new SubCategory(){Id=151, CategoryId = 9, CategoryName = "Для песочницы" } ,
@@ -254,9 +247,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=171, CategoryId = 9, CategoryName = "Сюжетно-ролевые игры" } ,
                     new SubCategory(){Id=172, CategoryId = 9, CategoryName = "Творчество и рукоделие" } ,
                     new SubCategory(){Id=173, CategoryId = 9, CategoryName = "Фигурки и роботы" } ,
-
-
-
                     new SubCategory(){Id=174, CategoryId = 10, CategoryName = "Бескаркасная мебель" } ,
                     new SubCategory(){Id=175, CategoryId = 10, CategoryName = "Детская мебель" } ,
                     new SubCategory(){Id=176, CategoryId = 10, CategoryName = "Диваны и кресла" } ,
@@ -272,8 +262,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=186, CategoryId = 10, CategoryName = "Торговая мебель" } ,
                     new SubCategory(){Id=187, CategoryId = 10, CategoryName = "Зеркала" } ,
                     new SubCategory(){Id=188, CategoryId = 10, CategoryName = "Мебельная фурнитура" } ,
-
-
                     new SubCategory(){Id=189, CategoryId = 11, CategoryName = "Вкусные подарки" } ,
                     new SubCategory(){Id=190, CategoryId = 11, CategoryName = "Чай и кофе" } ,
                     new SubCategory(){Id=191, CategoryId = 11, CategoryName = "Сладости и хлебобулочные изделия" } ,
@@ -288,16 +276,12 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=200, CategoryId = 11, CategoryName = "Замороженная продукция" } ,
                     new SubCategory(){Id=201, CategoryId = 11, CategoryName = "Фрукты и ягоды" } ,
                     new SubCategory(){Id=202, CategoryId = 11, CategoryName = "Овощи" } ,
-
-
                     new SubCategory(){Id=203, CategoryId = 12, CategoryName = "Климатическая техника" } ,
                     new SubCategory(){Id=204, CategoryId = 12, CategoryName = "Красота и здоровье" } ,
                     new SubCategory(){Id=205, CategoryId = 12, CategoryName = "Садовая техника" } ,
                     new SubCategory(){Id=206, CategoryId = 12, CategoryName = "Техника для дома" } ,
                     new SubCategory(){Id=207, CategoryId = 12, CategoryName = "Техника для кухни" } ,
                     new SubCategory(){Id=208, CategoryId = 12, CategoryName = "Крупная бытовая техника" } ,
-
-
                     new SubCategory(){Id=209, CategoryId = 13, CategoryName = "Для кошек" } ,
                     new SubCategory(){Id=210, CategoryId = 13, CategoryName = "Для собак" } ,
                     new SubCategory(){Id=211, CategoryId = 13, CategoryName = "Для птиц" } ,
@@ -316,8 +300,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=224, CategoryId = 13, CategoryName = "Груминг и уход" } ,
                     new SubCategory(){Id=225, CategoryId = 13, CategoryName = "Одежда" } ,
                     new SubCategory(){Id=226, CategoryId = 13, CategoryName = "Ветаптека" } ,
-
-
                     new SubCategory(){Id=227, CategoryId = 14, CategoryName = "Фитнес и тренажеры" } ,
                     new SubCategory(){Id=228, CategoryId = 14, CategoryName = "Велоспорт" } ,
                     new SubCategory(){Id=229, CategoryId = 14, CategoryName = "Йога/Пилатес" } ,
@@ -346,9 +328,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=252, CategoryId = 14, CategoryName = "Спортивная обувь" } ,
                     new SubCategory(){Id=253, CategoryId = 14, CategoryName = "Товары для самообороны" } ,
                     new SubCategory(){Id=254, CategoryId = 14, CategoryName = "Электроника" } ,
-
-
-
                     new SubCategory(){Id=255, CategoryId = 15, CategoryName = "Запчасти на легковые автомобили" } ,
                     new SubCategory(){Id=256, CategoryId = 15, CategoryName = "Масла и жидкости" } ,
                     new SubCategory(){Id=257, CategoryId = 15, CategoryName = "Автокосметика и автохимия" } ,
@@ -365,9 +344,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=268, CategoryId = 15, CategoryName = "OFFroad" } ,
                     new SubCategory(){Id=269, CategoryId = 15, CategoryName = "Запчасти на силовую технику" } ,
                     new SubCategory(){Id=270, CategoryId = 15, CategoryName = "Запчасти для лодок и катеров" } ,
-
-
-
                     new SubCategory(){Id=271, CategoryId = 16, CategoryName = "Одежда для девочек" } ,
                     new SubCategory(){Id=272, CategoryId = 16, CategoryName = "Одежда для мальчиков" } ,
                     new SubCategory(){Id=273, CategoryId = 16, CategoryName = "Банты" } ,
@@ -383,8 +359,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=283, CategoryId = 16, CategoryName = "Учебная литература" } ,
                     new SubCategory(){Id=284, CategoryId = 16, CategoryName = "Школьные принадлежности" } ,
                     new SubCategory(){Id=285, CategoryId = 16, CategoryName = "Школьные рюкзаки" } ,
-
-
                     new SubCategory(){Id=286, CategoryId = 17, CategoryName = "Художественная литература" } ,
                     new SubCategory(){Id=287, CategoryId = 17, CategoryName = "Комиксы и манга" } ,
                     new SubCategory(){Id=288, CategoryId = 17, CategoryName = "Книги для детей" } ,
@@ -413,9 +387,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=311, CategoryId = 17, CategoryName = "Аудиокниги" } ,
                     new SubCategory(){Id=312, CategoryId = 17, CategoryName = "Цифровые книги" } ,
                     new SubCategory(){Id=313, CategoryId = 17, CategoryName = "Цифровые аудиокниги" } ,
-
-
-
                     new SubCategory(){Id=314, CategoryId = 18, CategoryName = "Кольца" } ,
                     new SubCategory(){Id=315, CategoryId = 18, CategoryName = "Серьги" } ,
                     new SubCategory(){Id=316, CategoryId = 18, CategoryName = "Браслеты" } ,
@@ -432,9 +403,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=327, CategoryId = 18, CategoryName = "Украшения из серебра" } ,
                     new SubCategory(){Id=328, CategoryId = 18, CategoryName = "Украшения из керамики" } ,
                     new SubCategory(){Id=329, CategoryId = 18, CategoryName = "Аксессуары для украшений" } ,
-
-
-
                     new SubCategory(){Id=330, CategoryId = 19, CategoryName = "Двери, окна и фурнитура" } ,
                     new SubCategory(){Id=331, CategoryId = 19, CategoryName = "Инструменты и оснастка" } ,
                     new SubCategory(){Id=332, CategoryId = 19, CategoryName = "Отделочные материалы" } ,
@@ -445,8 +413,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=337, CategoryId = 19, CategoryName = "Крепеж" } ,
                     new SubCategory(){Id=338, CategoryId = 19, CategoryName = "Стройматериалы" } ,
                     new SubCategory(){Id=339, CategoryId = 19, CategoryName = "Сборные конструкции" } ,
-
-
                     new SubCategory(){Id=340, CategoryId = 20, CategoryName = "Бассейны" } ,
                     new SubCategory(){Id=341, CategoryId = 20, CategoryName = "Горшки, опоры и все для рассады" } ,
                     new SubCategory(){Id=342, CategoryId = 20, CategoryName = "Грили, мангалы и барбекю" } ,
@@ -462,9 +428,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=352, CategoryId = 20, CategoryName = "Товары для бани и сауны" } ,
                     new SubCategory(){Id=353, CategoryId = 20, CategoryName = "Товары для кемпинга, пикника и отдыха" } ,
                     new SubCategory(){Id=354, CategoryId = 20, CategoryName = "Удобрения, химикаты и средства защиты" } ,
-
-
-
                     new SubCategory(){Id=355, CategoryId = 21, CategoryName = "БАДы" } ,
                     new SubCategory(){Id=356, CategoryId = 21, CategoryName = "Грибы сушеные и капсулированные" } ,
                     new SubCategory(){Id=357, CategoryId = 21, CategoryName = "Дезинфекция, стерилизация и утилизация" } ,
@@ -480,9 +443,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=367, CategoryId = 21, CategoryName = "Реабилитация" } ,
                     new SubCategory(){Id=368, CategoryId = 21, CategoryName = "Сиропы и бальзамы" } ,
                     new SubCategory(){Id=369, CategoryId = 21, CategoryName = "Уход за полостью рта" } ,
-
-
-
                     new SubCategory(){Id=370, CategoryId = 22, CategoryName = "Бумажная продукция" } ,
                     new SubCategory(){Id=371, CategoryId = 22, CategoryName = "Карты и глобусы" } ,
                     new SubCategory(){Id=372, CategoryId = 22, CategoryName = "Офисные принадлежности" } ,
@@ -491,9 +451,6 @@ namespace OnlineMarket.DAL
                     new SubCategory(){Id=375, CategoryId = 22, CategoryName = "Счетный материал" } ,
                     new SubCategory(){Id=376, CategoryId = 22, CategoryName = "Торговые принадлежности" } ,
                     new SubCategory(){Id=377, CategoryId = 22, CategoryName = "Чертежные принадлежности" } ,
-
-
-
                     new SubCategory(){Id=378, CategoryId = 23, CategoryName = "Видео" } ,
                     new SubCategory(){Id=379, CategoryId = 23, CategoryName = "Аудио" } ,
                     new SubCategory(){Id=380, CategoryId = 23, CategoryName = "Электронные Книги" } ,
@@ -506,31 +463,74 @@ namespace OnlineMarket.DAL
 
             });
 
-
-
-
-
-
             modelBuilder.Entity<Product>(builder =>
             {
                 builder.ToTable(nameof(Product)).HasKey(p => p.Id);
                 builder.HasOne(p => p.SubCategory);
                 builder.HasOne(p => p.Seller);
-            });
-            modelBuilder.Entity<Seller>().ToTable(nameof(Seller));
+                builder.HasData(new Product[]
+                {
+                    new Product() {Id = 1, ProductName = "Рубашка оверсайз базовая", Price = 1310, Quantity = 500, SubCategoryId = 1, 
+                        ProductPhoto = File.ReadAllBytes("C:\\Users\\pocht\\Downloads\\photo for OnlineMarket\\1\\1-1.png"),
+                        ProductDescription = "Рубашка женская оверсайз.Наш хит, но в новом исполнении. Чтобы изделие меньше мялось и было менее прихотливым в уходе - мы создали рубашку из смесового хлопка. Женская рубашка. Рубашка из качественного материала в стиле OVERSIZE белого цвета. Тонкий длинноволокнистый хлопок особенно прочный, отлично пропускает воздух и впитывает влагу, что делает его идеальным выбором для любого гардероба. Свободная и удлиненная женская рубашка оверсайз, позволяет с легкостью скрыть недостатки фигуры и подчёркнуть её достоинства. Она дополнит любой ваш образ с шортами и короткими топами, легинсами, джинсами, брюками и юбками. А также рубашку можно носить как блузку, или же носить как второй слой поверх футболки или топа. Если вам нужна блузка для офиса, блузка на новый год, блузка вечерняя или также рубашка на новый год, то эта белая базовая и черная рубашки будут идеальными вариантами вашего гардероба. На 1 сентября женская оверсайз летняя хлопок, классическая рубашка, рубашка женская в клетку, белая рубашка, черная рубашка, чёрная рубашка, джинсовая рубашка женская, льняная рубашка женская, рубашка-платье, розовая рубашка с коротким рукавом с длинным рукавом"},
+                    
+                    new Product() {Id = 2, ProductName = "Блузка женская праздничная с коротким рукавом офисная летняя", Price = 1377, Quantity = 500, SubCategoryId = 1,
+                        ProductPhoto = File.ReadAllBytes("C:\\Users\\pocht\\Downloads\\photo for OnlineMarket\\2\\2-1.png"),
+                        ProductDescription = "Блузка женская нарядная летняя - новинка от MOVATTY. Блузка школьная праздничная вечерняя, благодаря качественной ткани лапша и правильному лекалу сделает Ваш образ стильным, модным и женственным. Блузка для девочки школьная идеально подойдет как школьная форма. Блузка с объемными рукавами - всесезонная, можно надеть: на вечеринку, на свадьбу, на свидание, в ресторан, в путешествие, в отпуск, на праздник, для подружек невесты. Блузка женская офисная, и на каждый день подойдет для повседневного образа: в офис, на учебу, блуза на работу и прогулку. Рукав волан (флаттер) блузки женской нарядной сделает акцент в Вашем образе и направит взгляд на легкость волн. Блузка летняя в офис представлена в цветах: черная, белая, розовая (фуксия). Блузка женская нарядная сделает ваш образ неотразимым. Блузки, кофты и рубашки - неотъемлемая часть гардероба. Блузка с воланами однотонная - базовая вещь в коллекции женской одежды. Блузка с коротким рукавом не оставит Вас равнодушной! Блузка женская в офис ждёт Ваши отзывы с фотографиями. С уважением, MOVATTY."},
 
+                    new Product() {Id = 3, ProductName = "Рубашка женская оверсайз белая летняя с длинным рукавом", Price = 1476, Quantity= 500, SubCategoryId = 1,
+                        ProductPhoto = File.ReadAllBytes("C:\\Users\\pocht\\Downloads\\photo for OnlineMarket\\3\\3-1.png"), 
+                        ProductDescription = "Женская красивая рубашка из хлопка предсталена в белом цвете. Можно носить беременным как оверсайз. Наша удлиненная рубаха - стильная и модная одежда на любой случай жизни. Классическая блуза - базовая вещь в гардеробе каждой девушки и женщины. Она также подходит для подростков и девочек в школьном возрасте. Рукав рубашки для пляжа длинный, что защищает от солнца в жаркое время года. Она нарядная и приталенная, что делает ее идеальной для работы в офисе или для школы. Хлопковая школьная блуза также может быть использована как пляжная рубашка, совершенно легкая и свободная. Отлично подойдет подросткам, т.к их мода - вещи больших oversize размеров. Однотонная повседневная рубашка универсальна - для дома, пляжа или деловой встречи. Приятный на ощупь трикотаж идеально впишется в весеннее время года, а так же создаст праздничные и вечерние образы. Офисные белые блузки- это ежедневная классика уже долгие годы. Домашняя трикотажная блуза с нагрудным карманом удобна и практична. Популярная молодежная новинка станет любимой вещью в вашей коллекции одежды. В нашем магазине Вы всегда можете найти товары на распродаже!"}
+                });
+            });
+
+            modelBuilder.Entity<Seller>(builder =>
+            {
+                builder.ToTable(nameof(Seller)).HasKey(p => p.Id);
+                builder.HasMany(p => p.Product);
+                builder.HasMany(p => p.SubCategory);
+                builder.HasOne(p => p.User);
+                builder.HasData(new Seller[]
+                {
+                    new Seller() { Id = 1, UserId = 1, SellerName = "OLESA CHUGUNOVA", SellerPhoto = File.ReadAllBytes("C:\\Users\\pocht\\Downloads\\photo for OnlineMarket\\1\\logo.jpg"),
+                    SellerDescription = "заглушка" },
+                    new Seller() {Id = 2,  UserId = 2, SellerName = "MOVATTY", SellerPhoto = File.ReadAllBytes("C:\\Users\\pocht\\Downloads\\photo for OnlineMarket\\2\\logo.jpg"),
+                    SellerDescription = "заглушка"},
+                    new Seller() {Id = 3,  UserId = 3, SellerName = "MOOON", SellerPhoto = File.ReadAllBytes("C:\\Users\\pocht\\Downloads\\photo for OnlineMarket\\3\\logo.jpg"),
+                    SellerDescription = "заглушка"}
+                });
+   
+
+            });
+            
 
             modelBuilder.Entity<User>(builder =>
             {
                 builder.ToTable(nameof(User)).HasKey(p => p.Id);
                 builder.HasOne(p => p.Basket).WithOne(p => p.User).
                 HasPrincipalKey<User>(p => p.Id).OnDelete(DeleteBehavior.Cascade);
+                builder.HasData(new User[]
+                {
+                    new User() { Id = 1, BasketId = 1, UserName = "Test1@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456")},
+                    new User() { Id = 2, BasketId = 2, UserName = "Test2@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456")},
+                    new User() { Id = 3, BasketId = 3, UserName = "Test3@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456")},
+                    new User() { Id = 4, BasketId = 4, UserName = "Test4@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456")},
+                    new User() { Id = 5, BasketId = 5, UserName = "burbon@mail.com", Role= Enum.Role.Admin, Password = HashPasswordHelper.HashPassowrd("123456")}
+                });
+
             });
             modelBuilder.Entity<Basket>(builder =>
             {
                 builder.ToTable(nameof(Basket)).HasKey(p => p.BasketId);
                 builder.HasOne(p => p.User);
                 builder.HasMany(p => p.Order);
+                builder.HasData(new Basket[]
+                    {
+                        new Basket() { BasketId = 1, UserId = 1},
+                        new Basket() { BasketId = 2, UserId = 2},
+                        new Basket() { BasketId = 3, UserId = 3},
+                        new Basket() { BasketId = 4, UserId = 4}
+                    });
             });
             modelBuilder.Entity<Order>(builder =>
             {
@@ -542,6 +542,23 @@ namespace OnlineMarket.DAL
                 builder.ToTable(nameof(Payment)).HasKey(p => p.Id);
                 builder.HasOne(p => p.Seller);
             });
+        }
+
+
+
+
+        public static class HashPasswordHelper
+        {
+            public static string HashPassowrd(string password)
+            {
+                using (var sha256 = SHA256.Create())
+                {
+                    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                    var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+                    return hash;
+                }
+            }
         }
     }
 }

@@ -28,7 +28,7 @@ namespace OnlineMarket.BLL.Service.Implementations
                     ProductDescription = product.ProductDescription,
                     ProductPhoto = product.ProductPhoto,
                     Price = product.Price,
-                    CategoryId = product.CategoryId
+                    SubCategoryId = product.SubCategoryId
 
                 };
                 await _repository.CreateAsync(prod);

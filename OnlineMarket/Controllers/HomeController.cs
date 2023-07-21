@@ -32,7 +32,7 @@ namespace OnlineMarket.Controllers
                 productVM.ProductDescription = product.ProductDescription;
                 productVM.Price = product.Price;
                 productVM.ProductPhoto = product.ProductPhoto;
-                productVM.CategoryId = product.CategoryId;
+                productVM.SubCategoryId = product.SubCategoryId;
                 productVM.Id = product.Id;
                 productVM.Quantity = product.Quantity;
                 productVMList.Add(productVM);
