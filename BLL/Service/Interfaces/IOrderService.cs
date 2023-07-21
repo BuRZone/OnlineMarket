@@ -1,11 +1,5 @@
 ﻿using OnlineMarket.BLL.ViewModels.Order;
-using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineMarket.BLL.Service.Interfaces
 {

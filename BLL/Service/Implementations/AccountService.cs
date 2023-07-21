@@ -6,12 +6,7 @@ using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Enum;
 using OnlineMarket.DAL.Interfaces;
 using OnlineMarket.LOGIC.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
@@ -33,7 +28,7 @@ namespace OnlineMarket.BLL.Service.Implementations
             try
             {
                 var user = await _userRepository.GetAsync().FirstOrDefaultAsync(x => x.UserName == registerVM.UserName);
-                if (user == null) 
+                if (user == null)
                 {
                     user = new User()
                     {

@@ -5,8 +5,6 @@ using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
-using OnlineMarket.DAL.MongoRepositories;
-using OnlineMarket.DAL.SQLRepositories;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
@@ -46,7 +44,7 @@ namespace OnlineMarket.BLL.Service.Implementations
         public async Task Delete(int? id)
         {
             try
-            { 
+            {
                 var categoryQ = await _repository.GetAsync().FirstOrDefaultAsync(x => x.Id == id);
 
                 if (categoryQ != null)
@@ -63,7 +61,7 @@ namespace OnlineMarket.BLL.Service.Implementations
 
         public IQueryable<Category> GetAsync()
         {
-            
+
             return _repository.GetAsync();
         }
 

@@ -4,10 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.BLL.ViewModels.Product;
-using OnlineMarket.DAL.Entity;
-using OnlineMarket.DAL.Interfaces;
-using System.ComponentModel.DataAnnotations;
-using ZstdSharp.Unsafe;
 
 namespace OnlineMarket.Controllers
 {
@@ -17,17 +13,17 @@ namespace OnlineMarket.Controllers
 
         public CategoryController(ICategoryService categoryService)
         {
-            _categoryService = categoryService; 
+            _categoryService = categoryService;
         }
         public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<IActionResult> GetCategory() 
+        public async Task<IActionResult> GetCategory()
         {
             var categoryVMList = new List<CategoryVM>();
-            var categoryList = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName}).AsNoTracking().ToListAsync();
+            var categoryList = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).AsNoTracking().ToListAsync();
             if (categoryList == null)
             {
                 return NotFound();
@@ -43,7 +39,7 @@ namespace OnlineMarket.Controllers
             return View(categoryVMList);
         }
 
-        public async Task <IActionResult> Create()
+        public async Task<IActionResult> Create()
         {
             CategoryVM categoryVM = new CategoryVM();
             var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).OrderBy(x => x.CategoryName).ToListAsync();
@@ -54,7 +50,7 @@ namespace OnlineMarket.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryVM category) 
+        public async Task<IActionResult> Create(CategoryVM category)
         {
             CategoryVM categoryVM = new CategoryVM();
             var categoryList = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).OrderBy(x => x.CategoryName).ToListAsync();
@@ -69,7 +65,7 @@ namespace OnlineMarket.Controllers
             return View(categoryVM);
         }
 
-        public async Task <IActionResult> Delete(int? id) 
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -93,12 +89,12 @@ namespace OnlineMarket.Controllers
         public async Task<IActionResult> GetAll(int Id)
         {
             var cat = await _categoryService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(m => m.Id == Id);
-            if (cat == null) 
+            if (cat == null)
             {
                 return NotFound();
             }
             var productVMList = new List<ProductVM>();
-            
+
             foreach (var product in cat.Product)
             {
                 ProductVM productVM = new ProductVM();
@@ -111,12 +107,12 @@ namespace OnlineMarket.Controllers
                 productVM.Quantity = product.Quantity;
                 productVMList.Add(productVM);
             }
-            
+
             CategoryVM categoryVM = new CategoryVM();
             categoryVM.Id = cat.Id;
             categoryVM.CategoryName = cat.CategoryName;
             categoryVM.Product = productVMList;
-            
+
             return View(categoryVM);
         }
     }

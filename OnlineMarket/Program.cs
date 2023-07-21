@@ -27,7 +27,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
        o.LoginPath = new PathString("/Account/Login");
        o.AccessDeniedPath = new PathString("/Account/Login");
    });
-builder.Services.AddAuthorization(); 
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

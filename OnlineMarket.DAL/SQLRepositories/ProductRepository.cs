@@ -43,7 +43,7 @@ namespace OnlineMarket.DAL.SQLRepositories
 
         public IQueryable<Product> GetAsync()
         {
-           return _context.Products;
+            return _context.Products;
         }
 
         public async Task UpdateAsync(Product product)

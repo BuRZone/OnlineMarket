@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OnlineMarket.BLL.Service.Implementations;
 using OnlineMarket.BLL.Service.Interfaces;
-using OnlineMarket.BLL.ViewModels.Basket;
 using OnlineMarket.BLL.ViewModels.Order;
 using OnlineMarket.BLL.ViewModels.Product;
-using OnlineMarket.DAL.Entity;
 
 namespace OnlineMarket.Controllers
 {
@@ -34,7 +31,7 @@ namespace OnlineMarket.Controllers
             productVM.ProductDescription = productQ.ProductDescription;
             productVM.Price = productQ.Price;
             productVM.ProductPhoto = productQ.ProductPhoto;
-            productVM.CategoryId = productQ.CategoryId;
+            productVM.SubCategoryId = productQ.SubCategoryId;
             productVM.Id = productQ.Id;
             productVM.Quantity = productQ.Quantity;
 
@@ -59,9 +56,9 @@ namespace OnlineMarket.Controllers
             var basketQ = await _basketService.GetAsync().Include(x => x.Order).ThenInclude(x => x.Product).
                 FirstOrDefaultAsync(x => x.User.UserName == User.Identity.Name);
             var productQ = basketQ.Order.Select(x => x.Product);
-           
 
-            foreach(var product in productQ)
+
+            foreach (var product in productQ)
             {
 
                 ProductVM productVM = new ProductVM();
@@ -69,7 +66,7 @@ namespace OnlineMarket.Controllers
                 productVM.ProductDescription = product.ProductDescription;
                 productVM.Price = product.Price;
                 productVM.ProductPhoto = product.ProductPhoto;
-                productVM.CategoryId = product.CategoryId;
+                productVM.SubCategoryId = product.SubCategoryId;
                 productVM.Id = product.Id;
                 productVM.Quantity = product.Quantity;
                 productVMList.Add(productVM);

@@ -1,11 +1,6 @@
 ﻿using MongoDB.Driver;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineMarket.DAL.MongoRepositories
 {

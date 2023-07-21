@@ -1,18 +1,8 @@
-﻿using Amazon.Auth.AccessControlPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using OnlineMarket.BLL.Service.Implementations;
 using OnlineMarket.BLL.Service.Interfaces;
-using OnlineMarket.BLL.ViewModels.Basket;
 using OnlineMarket.BLL.ViewModels.Product;
-using OnlineMarket.DAL.Entity;
-using OnlineMarket.Models;
-using System.Security.Claims;
-using System.Security.Cryptography.Xml;
-using System.Security.Principal;
 
 namespace OnlineMarket.Controllers
 {
@@ -46,7 +36,7 @@ namespace OnlineMarket.Controllers
                 productVM.ProductDescription = product.ProductDescription;
                 productVM.Price = product.Price;
                 productVM.ProductPhoto = product.ProductPhoto;
-                productVM.CategoryId = product.CategoryId;
+                productVM.SubCategoryId = product.SubCategoryId;
                 productVM.Id = product.Id;
                 productVM.Quantity = product.Quantity;
                 productVMList.Add(productVM);
@@ -56,7 +46,7 @@ namespace OnlineMarket.Controllers
         }
 
 
-        public async Task <IActionResult> Create()
+        public async Task<IActionResult> Create()
         {
             ProductVM productVM = new ProductVM();
             var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).ToListAsync();
@@ -74,10 +64,10 @@ namespace OnlineMarket.Controllers
 
             ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
 
-            if (productVM.Price == default )
+            if (productVM.Price == default)
             {
-                ModelState.AddModelError("Price","укажите стомость");
-                
+                ModelState.AddModelError("Price", "укажите стомость");
+
             }
             if (productVM.Quantity == default)
             {
@@ -115,7 +105,7 @@ namespace OnlineMarket.Controllers
             productVM.ProductDescription = product.ProductDescription;
             productVM.Price = product.Price;
             productVM.ProductPhoto = product.ProductPhoto;
-            productVM.CategoryId = product.CategoryId;
+            productVM.SubCategoryId = product.SubCategoryId;
             productVM.Id = product.Id;
             productVM.Quantity = product.Quantity;
 

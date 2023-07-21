@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Product;
-using OnlineMarket.DAL.Entity;
 using OnlineMarket.Models;
 using System.Diagnostics;
 
@@ -19,14 +18,14 @@ namespace OnlineMarket.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            
+
             List<ProductVM> productVMList = new List<ProductVM>();
             var productList = await _productService.GetAsync().ToListAsync();
             if (productList == null)
             {
                 return NotFound();
             }
-            foreach (var product in productList) 
+            foreach (var product in productList)
             {
                 ProductVM productVM = new ProductVM();
                 productVM.ProductName = product.ProductName;

@@ -1,11 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Basket;
-using OnlineMarket.DAL;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
-using OnlineMarket.DAL.SQLRepositories;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
@@ -18,7 +15,7 @@ namespace OnlineMarket.BLL.Service.Implementations
             _logger = logger;
             _repository = repository;
         }
-       
+
         public IQueryable<Basket> GetAsync()
         {
 

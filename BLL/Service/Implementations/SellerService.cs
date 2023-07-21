@@ -4,7 +4,6 @@ using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Seller;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
-using OnlineMarket.DAL.SQLRepositories;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {

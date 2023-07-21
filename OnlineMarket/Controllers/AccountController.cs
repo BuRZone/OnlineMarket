@@ -37,9 +37,10 @@ namespace OnlineMarket.Controllers
             return View(registerVM);
         }
 
-        public IActionResult Login() 
-        {LoginVM vm = new LoginVM();
-            return View(vm); 
+        public IActionResult Login()
+        {
+            LoginVM vm = new LoginVM();
+            return View(vm);
         }
 
         [HttpPost]
@@ -70,7 +71,7 @@ namespace OnlineMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordVM passwordVM)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 await _accountService.ChangePassword(passwordVM);
                 return RedirectToAction("Index", "Home");

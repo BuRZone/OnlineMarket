@@ -5,7 +5,6 @@ using OnlineMarket.BLL.ViewModels.User;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Enum;
 using OnlineMarket.DAL.Interfaces;
-using OnlineMarket.DAL.SQLRepositories;
 using OnlineMarket.LOGIC.Helpers;
 
 namespace OnlineMarket.BLL.Service.Implementations

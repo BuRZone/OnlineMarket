@@ -4,7 +4,6 @@ using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
-using OnlineMarket.DAL.SQLRepositories;
 
 namespace OnlineMarket.BLL.Service.Implementations
 {
@@ -22,18 +21,18 @@ namespace OnlineMarket.BLL.Service.Implementations
         {
             try
             {
-                    var prod = new Product()
-                    {
-                        ProductName = product.ProductName,
-                        Quantity = product.Quantity,
-                        ProductDescription = product.ProductDescription,
-                        ProductPhoto = product.ProductPhoto,
-                        Price = product.Price,
-                        CategoryId = product.CategoryId
+                var prod = new Product()
+                {
+                    ProductName = product.ProductName,
+                    Quantity = product.Quantity,
+                    ProductDescription = product.ProductDescription,
+                    ProductPhoto = product.ProductPhoto,
+                    Price = product.Price,
+                    CategoryId = product.CategoryId
 
-                    };
-                    await _repository.CreateAsync(prod);
-                    _logger.LogInformation($"[ProductService.CreateAsync] создан новый продукт {prod.ProductName}");
+                };
+                await _repository.CreateAsync(prod);
+                _logger.LogInformation($"[ProductService.CreateAsync] создан новый продукт {prod.ProductName}");
             }
             catch (Exception ex)
             {
