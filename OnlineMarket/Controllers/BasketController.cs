@@ -18,7 +18,7 @@ namespace OnlineMarket.Controllers
             _orderService = orderService;
 
         }
-        public async Task<IActionResult> AddToCart(int? id)
+        public async Task<ActionResult> AddToCart(int? id)
         {
 
             var productQ = await _productService.GetAsync().FirstOrDefaultAsync(x => x.Id == id);
@@ -45,7 +45,7 @@ namespace OnlineMarket.Controllers
             };
             await _orderService.CreateAsync(orderVM);
 
-            return View(productVM);
+            return RedirectToAction("GetProduct", "Product");
         }
 
 

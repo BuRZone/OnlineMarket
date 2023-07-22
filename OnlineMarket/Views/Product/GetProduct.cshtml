@@ -24,7 +24,7 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    <a asp-route-id="@item.Id" asp-controller="Basket" asp-action="AddToCart">Add to Cart</a>
+                    @Html.ActionLink("Add to Cart", "AddToCart", "Basket", new {id=item.Id})
                 </td>
 
                 <td>
@@ -36,3 +36,19 @@
         }
     </tbody>
 </table>
+@*<script>
+
+    $("#myLink").click(function (e) {
+
+        e.preventDefault();
+        $.ajax({
+
+            url: $(this).attr("href"), // comma here instead of semicolon
+            success: function () {
+                alert("Value Added");  // or any other indication if you want to show
+            }
+
+        });
+
+    });
+</script>*@
