@@ -6,59 +6,80 @@
     <title>@ViewData["Title"] - OnlineMarket</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style1.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
 @*    <link rel="stylesheet" href="~/OnlineMarket.styles.css" asp-append-version="true" />*@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 </head>
+
+ <div class="btn1" id="secondbtn1">
+         <span class="fas fa-bars"></span>
+         </div>
+
+         <nav1 class="sidebar">
+         <div class="text">
+            Side Menu
+         </div>
+         <ul>
+            <li class="active"><a href="#">Dashboard</a></li>
+            <li>
+               <a href="#" class="feat-btn">Features
+               <span class="fas fa-caret-down first"></span>
+               </a>
+               <ul class="feat-show">
+                  <li><a href="#">Pages</a></li>
+                  <li><a href="#">Elements</a></li>
+               </ul>
+            </li>
+            <li>
+               <a href="#" class="serv-btn">Services
+               <span class="fas fa-caret-down second"></span>
+               </a>
+               <ul class="serv-show">
+                  <li><a href="#">App Design</a></li>
+                  <li><a href="#">Web Design</a></li>
+               </ul>
+            </li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Shortcuts</a></li>
+            <li><a href="#">Feedback</a></li>
+         </ul>
+      </nav1>
+
 <body>
+
     <header>
-
-
-
-        @*@await Component.InvokeAsync("OffCanvasCategory");*@
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header" style="height:60px">
-                <h3 class="offcanvas-title" id="offcanvasExampleLabel">Categories</h3>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Обувь</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Детям</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Мужчинам</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Женщинам</a></p>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Дом</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Красота</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Аксессуары</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Электроника</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Игрушки</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Мебель</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Продукты</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Бытовая техника</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Зоотовары</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Спорт</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Автотовары</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Школа</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Книги</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Ювелирные изделия </a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Для ремонта</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Сад и дача</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Здоровье</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Канцтовары</a>
-                <p><a type="button" class="btn btn-primary" style="width:250px" href="#"> Цифровые товары</a>
-                
-            </div>
-        </div>
-
+                    
+      
+      
+            @*@await Component.InvokeAsync("Category")*@
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-
             <div class="container-fluid">
-                
-               <form>
-                   <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+
+                 
+
+
+
+                   @*<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                     <span class="navbar-toggler-icon"></span>
-                   </button>
-                </form>
+                   </button>*@
+
+                <div> <button class="btn" id="mybtn">
+         <span class="fas fa-bars"></span>
+         </button>
+         <div class="overlay"></div>
+</div>
+
+
+
+
+
+
+
 
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">OnlineMarket </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,32 +121,27 @@
                             <i class="bi bi-person" style="font-size: 2.5em;padding-left:0.05em"></i>
                             <p style="margin-top:-0.9em;">Logout</p>
                             </button>
-                        </form> 
+                        </form>
+                            <div><a asp-controller="Basket" asp-action="Get" class="nav-link">
+                            <i class="bi bi-cart4" style="font-size: 2.5em;"></i>
+                            <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
+                            </a>
+                            </div>
                     }
                     else
                     {
-                    <div><a asp-controller="Account" asp-action="Login" class="nav-link"> 
-                        <i class="bi bi-person" style="font-size: 2.5em; margin-right:0.30em"></i>
-                        <p style="margin-top:-0.9em;">Login</p></a>
-                    </div>
-                    }
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div><a asp-controller="Basket" asp-action="Get" class="nav-link">
-                                <i class="bi bi-cart4" style="font-size: 2.5em;" ></i>
-                                <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
-                            </a>
+                        <div><a asp-controller="Account" asp-action="Login" class="nav-link"> 
+                            <i class="bi bi-person" style="font-size: 2.5em; margin-right:0.30em"></i>
+                            <p style="margin-top:-0.9em;">Login</p></a>
+                        </div>
+
+                        <div>
+                            <i class="bi bi-cart4" style="font-size: 2.5em;"></i>
+                            <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
                         </div>
                     }
-                    else
-                    {
-                        <div>
-                        <i class="bi bi-cart4" style="font-size: 2.5em;"></i>
-                        <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
-                    </div>
-                    }
                 </div>
-                </div>
+             </div>
         </nav>
 
         <nav class="navbar navbar-expand-lg bg-primary" style="height: 100px;padding-bottom:50px" data-bs-theme="dark">
@@ -158,3 +174,43 @@
 </body>
 </html>
 
+
+        <script>
+         $('#mybtn').on("click",function(){
+           $('html body').toggleClass("lock");
+           $('#secondbtn1').addClass("click");
+           $('.sidebar').toggleClass("show");
+
+            var $overlay = $('.overlay'),
+            openClass = 'is-open';
+            $overlay.addClass(openClass);
+         });
+         $('#secondbtn1').on("click",function(){
+           $('html body').toggleClass("lock");
+           $('#secondbtn1').toggleClass("click");
+           $('.sidebar').toggleClass("show");
+
+            var $overlay = $('.overlay'),
+            openClass = 'is-open';
+            $overlay.removeClass(openClass);
+         });
+
+         $('body main').on("click",function(){
+           $('html body').removeClass("lock");
+           $('#mybtn').removeClass("click");
+           $('.sidebar').removeClass("show");
+           $('#secondbtn1').removeClass("click");
+         });
+           $('.feat-btn').click(function(){
+             $('nav1 ul .feat-show').toggleClass("show");
+             $('nav1 ul .first').toggleClass("rotate");
+           });
+           $('.serv-btn').click(function(){
+             $('nav1 ul .serv-show').toggleClass("show1");
+             $('nav1 ul .second').toggleClass("rotate");
+           });
+           $('nav1 ul li').click(function(){
+             $(this).addClass("active").siblings().removeClass("active");
+           });
+      </script>
+    
