@@ -15,72 +15,21 @@
 
 </head>
 
- <div class="btn1" id="secondbtn1">
-         <span class="fas fa-bars"></span>
-         </div>
+      @await Component.InvokeAsync("Category")
 
-         <nav1 class="sidebar">
-         <div class="text">
-            Side Menu
-         </div>
-         <ul>
-            <li class="active"><a href="#">Dashboard</a></li>
-            <li>
-               <a href="#" class="feat-btn">Features
-               <span class="fas fa-caret-down first"></span>
-               </a>
-               <ul class="feat-show">
-                  <li><a href="#">Pages</a></li>
-                  <li><a href="#">Elements</a></li>
-               </ul>
-            </li>
-            <li>
-               <a href="#" class="serv-btn">Services
-               <span class="fas fa-caret-down second"></span>
-               </a>
-               <ul class="serv-show">
-                  <li><a href="#">App Design</a></li>
-                  <li><a href="#">Web Design</a></li>
-               </ul>
-            </li>
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="#">Overview</a></li>
-            <li><a href="#">Shortcuts</a></li>
-            <li><a href="#">Feedback</a></li>
-         </ul>
-      </nav1>
+
 
 <body>
-
-    <header>
-                    
-      
-      
-            @*@await Component.InvokeAsync("Category")*@
+ 
+    <header>                   
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
-
-                 
-
-
-
-                   @*<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                    <span class="navbar-toggler-icon"></span>
-                   </button>*@
-
-                <div> <button class="btn" id="mybtn">
-         <span class="fas fa-bars"></span>
-         </button>
-         <div class="overlay"></div>
-</div>
-
-
-
-
-
-
-
-
+                <div> 
+                    <button class="btn btn-primary" id="mybtn">
+                        <span class="navbar-toggler-icon" style="height:35px;width:35px"></span>
+                      </button>
+                        <div class="overlay"></div>
+                </div>
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">OnlineMarket </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -116,6 +65,7 @@
                 
                     @if (User.Identity.IsAuthenticated)
                     {
+
                         <form method="post" asp-controller="Account" asp-action="Logout" class="nav-link">
                             <button type="submit" style="background-color:unset;border:none;">
                             <i class="bi bi-person" style="font-size: 2.5em;padding-left:0.05em"></i>
@@ -127,6 +77,7 @@
                             <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
                             </a>
                             </div>
+
                     }
                     else
                     {
@@ -164,53 +115,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - OnlineMarket - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+           @* &copy; 2023 - OnlineMarket - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/style1.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-</html>
+</html>    
 
-
-        <script>
-         $('#mybtn').on("click",function(){
-           $('html body').toggleClass("lock");
-           $('#secondbtn1').addClass("click");
-           $('.sidebar').toggleClass("show");
-
-            var $overlay = $('.overlay'),
-            openClass = 'is-open';
-            $overlay.addClass(openClass);
-         });
-         $('#secondbtn1').on("click",function(){
-           $('html body').toggleClass("lock");
-           $('#secondbtn1').toggleClass("click");
-           $('.sidebar').toggleClass("show");
-
-            var $overlay = $('.overlay'),
-            openClass = 'is-open';
-            $overlay.removeClass(openClass);
-         });
-
-         $('body main').on("click",function(){
-           $('html body').removeClass("lock");
-           $('#mybtn').removeClass("click");
-           $('.sidebar').removeClass("show");
-           $('#secondbtn1').removeClass("click");
-         });
-           $('.feat-btn').click(function(){
-             $('nav1 ul .feat-show').toggleClass("show");
-             $('nav1 ul .first').toggleClass("rotate");
-           });
-           $('.serv-btn').click(function(){
-             $('nav1 ul .serv-show').toggleClass("show1");
-             $('nav1 ul .second').toggleClass("rotate");
-           });
-           $('nav1 ul li').click(function(){
-             $(this).addClass("active").siblings().removeClass("active");
-           });
-      </script>
-    

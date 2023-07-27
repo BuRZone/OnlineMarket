@@ -6,13 +6,13 @@ namespace OnlineMarket.BLL.ViewModels.Category
 {
     public class CategoryVM
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Display(Name = "Название категории")]
         [Required(ErrorMessage = "Введите название")]
         public string? CategoryName { get; set; }
 
-        public int SubCategoryId { get; set; }
-        public IEnumerable<SubCategoryVM> SubCategoryVM { get; set; }
+        public int? SubCategoryId { get; set; }
+        public IEnumerable<SubCategoryVM>? SubCategoryVM { get; set; }
         public IEnumerable<ProductVM>? Product { get; set; }
         public IEnumerable<SellerVM>? Seller { get; set; }
     }

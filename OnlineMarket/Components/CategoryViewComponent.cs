@@ -15,9 +15,10 @@ namespace OnlineMarket.Components
         }
 
         public List<CategoryVM> categoryVMList = new List<CategoryVM>();
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var categoryList = await _categoryService.GetAsync().ToListAsync();
+            var categoryList = await _categoryService.GetAsync().Include(x => x.SubCategory).ToListAsync();
 
             foreach (var categroy in categoryList)
             {
@@ -26,6 +27,8 @@ namespace OnlineMarket.Components
                 categoryVM.Id = categroy.Id;
                 categoryVMList.Add(categoryVM);
             }
+
+
 
             return View("CategoryViewComponent", categoryVMList);
         }
