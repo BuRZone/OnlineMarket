@@ -19,6 +19,7 @@
 
     @foreach (var item in Model)
     {
+        <input type="hidden" name="id" value="@item.Id"></input>
         <div class="container" style="position:center;">
             <div class="card text-white bg-secondary mb-3" style="max-width: 15rem;max-height:19rem;overflow:hidden;">
                 @*                <div class="card-header">@Html.DisplayFor(modelItem => item.ProductName)</div>*@

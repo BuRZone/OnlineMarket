@@ -43,13 +43,13 @@ namespace OnlineMarket.BLL.Service.Implementations
                         UserId = user.Id
                     };
                     await _basketRepository.CreateAsync(basket);
-                    user.BasketId = basket.BasketId;
+                    user.Basket = basket;
                     await _userRepository.UpdateAsync(user);
 
 
                     var result = Authenticate(user);
                     _logger.LogInformation($"[AccountService.Register] создан новый пользователь {user.UserName}");
-                    _logger.LogInformation($"[AccountService.Register] создана новая корзина {basket.BasketId} для пользователя {user.UserName}");
+                    _logger.LogInformation($"[AccountService.Register] создана новая корзина {basket.Id} для пользователя {user.UserName}");
                     return result;
                 }
                 _logger.LogWarning($"[AccountService.Register] пользователь с таким UserName: {user.UserName} уже существует");

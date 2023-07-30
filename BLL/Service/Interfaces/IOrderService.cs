@@ -8,6 +8,6 @@ namespace OnlineMarket.BLL.Service.Interfaces
         IQueryable<Order> GetAsync();
         Task CreateAsync(OrderVM orderVM);
         Task UpdateAsync(int? id);
-        Task Delete(int? id);
+        Task Delete(Order order);
     }
 }

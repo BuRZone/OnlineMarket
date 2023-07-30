@@ -83,11 +83,12 @@ nav1 ul::-webkit-scrollbar-thumb {
     height: 100%;
     left: -300px;
     background: #1b1b1b;
-    transition: left 0.3s ease;
+    transition: left 0.2s ease;
     z-index: 10;
 }
     .sidebar.show {
         left: 0px;
+        opacity:1;
     }
 .sidebar2 {
     position: fixed;
@@ -102,7 +103,7 @@ nav1 ul::-webkit-scrollbar-thumb {
 }
 
     .sidebar2.show {
-        left: 302px;
+        left: 301px;
         top: 0px;
         opacity: 1;
         transition-property: opacity;
@@ -225,7 +226,7 @@ nav1 ul {
     transform: translateX(-100%);
 }
 
-    .overlay.is-open {
+    .overlay.show {
         opacity: 1;
         visibility: visible;
         transform: translateX(0);

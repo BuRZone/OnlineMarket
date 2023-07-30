@@ -16,13 +16,13 @@ namespace OnlineMarket.BLL.ViewModels.Product
 
         [Display(Name = "Стоимость")]
         [Required(ErrorMessage = "Укажите стоимость")]
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
         [Display(Name = "Количество")]
         [Required(ErrorMessage = "Укажите количество")]
-        public int? Quantity { get; set; }
+        public int Quantity { get; set; }
         [Display(Name = "категория")]
         [Required(ErrorMessage = "Укажите категорию")]
-        public int? SubCategoryId { get; set; }
+        public int SubCategoryId { get; set; }
         [Required(ErrorMessage = "загрузите фотографии")]
         public IFormFile? ProductformFile { get; set; }
         public byte[]? ProductPhoto { get; set; }

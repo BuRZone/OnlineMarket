@@ -86,34 +86,6 @@ namespace OnlineMarket.Controllers
             return RedirectToAction("GetCategory");
         }
 
-        public async Task<IActionResult> GetAll(int Id)
-        {
-            var cat = await _categoryService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(m => m.Id == Id);
-            if (cat == null)
-            {
-                return NotFound();
-            }
-            var productVMList = new List<ProductVM>();
-
-            foreach (var product in cat.Product)
-            {
-                ProductVM productVM = new ProductVM();
-                productVM.ProductName = product.ProductName;
-                productVM.ProductDescription = product.ProductDescription;
-                productVM.Price = product.Price;
-                productVM.ProductPhoto = product.ProductPhoto;
-                productVM.SubCategoryId = product.SubCategoryId;
-                productVM.Id = product.Id;
-                productVM.Quantity = product.Quantity;
-                productVMList.Add(productVM);
-            }
-
-            CategoryVM categoryVM = new CategoryVM();
-            categoryVM.Id = cat.Id;
-            categoryVM.CategoryName = cat.CategoryName;
-            categoryVM.Product = productVMList;
-
-            return View(categoryVM);
-        }
+        
     }
 }

@@ -9,7 +9,7 @@
              @foreach(var item in Model)
              { 
                      <p>
-                         <form method="post"asp-controller="" asp-action="">
+                         <form method="post"asp-controller="SubCategory" asp-action="GetProductsFromSubCategory">
                            <input type="hidden" name="id" value="@item.Id"/> 
                            <button class="btn btn-primary btn-sm" id="SubCatbtn_@item.Id" style="width:90%">@item.CategoryName</button>
                          </form>

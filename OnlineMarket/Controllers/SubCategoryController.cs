@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Category;
+using OnlineMarket.BLL.ViewModels.Product;
 
 namespace OnlineMarket.Controllers
 {
@@ -47,6 +48,35 @@ namespace OnlineMarket.Controllers
             }
 
             return View(subCatVMList);
+        }
+        public async Task<IActionResult> GetProductsFromSubCategory(int Id)
+        {
+            var subCat = await _subCategoryService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(m => m.Id == Id);
+            if (subCat == null)
+            {
+                return NotFound();
+            }
+            var productVMList = new List<ProductVM>();
+
+            foreach (var product in subCat.Product)
+            {
+                ProductVM productVM = new ProductVM();
+                productVM.ProductName = product.ProductName;
+                productVM.ProductDescription = product.ProductDescription;
+                productVM.Price = product.Price;
+                productVM.ProductPhoto = product.ProductPhoto;
+                productVM.SubCategoryId = product.SubCategoryId;
+                productVM.Id = product.Id;
+                productVM.Quantity = product.Quantity;
+                productVMList.Add(productVM);
+            }
+
+            //SubCategoryVM subCategoryVM = new SubCategoryVM();
+            //subCategoryVM.Id = subCat.Id;
+            //subCategoryVM.CategoryName = subCat.CategoryName;
+            //subCategoryVM.Product = productVMList;
+
+            return View(productVMList);
         }
 
     }

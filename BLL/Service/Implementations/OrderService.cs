@@ -18,12 +18,12 @@ namespace OnlineMarket.BLL.Service.Implementations
             _logger = logger;
         }
 
-        public async Task Delete(int? id)
+        public async Task Delete(Order order)
         {
             try
             {
-                var order = await _baseRepository.GetAsync().FirstOrDefaultAsync(x => x.Id == id);
-                await _baseRepository.Delete(order);
+                var orderQ = await _baseRepository.GetAsync().FirstOrDefaultAsync(x => x.Id == order.Id);
+                await _baseRepository.Delete(orderQ);
             }
             catch (Exception)
             {
@@ -67,7 +67,7 @@ namespace OnlineMarket.BLL.Service.Implementations
                 {
                     DateCreated = orderVM.DateCreated,
                     BasketId = orderVM.BasketVMId,
-                    ProductId = orderVM.ProductVMId
+                    //Product = orderVM.ProductVM
                 };
                 await _baseRepository.CreateAsync(order);
 

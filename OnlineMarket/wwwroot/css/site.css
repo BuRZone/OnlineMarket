@@ -30,5 +30,6 @@ body {
     bottom: 0;
     width: 100%;
     /* Высота footer */
-    height: 40px;
+    height: 20px;
+    z-index: -1;
 }
