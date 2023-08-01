@@ -25,7 +25,7 @@
       @foreach(var item in Model)
       {
       <nav1 class="sidebar2" id="s_@item.Id">
-          <ul>
+          <ul style="width:100%">
          @await Component.InvokeAsync("SubCategory", @item.Id)
          </ul>
       </nav1>

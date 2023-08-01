@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineMarket;
 using OnlineMarket.DAL;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -36,6 +37,9 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
     DbInitializer.Initialize(context);
+    //Женская_Верхняя_Одежда.Initialize(context);
+    //Женские_Брюки.Initialize(context);
+    //Женские_Свитеры.Initialize(context);
 }
 
 

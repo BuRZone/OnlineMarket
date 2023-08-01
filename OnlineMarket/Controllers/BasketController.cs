@@ -20,6 +20,7 @@ namespace OnlineMarket.Controllers
 
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddToCart(int? id)
         {
 
@@ -42,6 +43,7 @@ namespace OnlineMarket.Controllers
             OrderVM orderVM = new OrderVM()
             {
                 ProductVM = productVM,
+                ProductVMId = productVM.Id,
                 BasketVMId = basketQ.Id,
                 DateCreated = DateTime.Now
             };
@@ -78,43 +80,16 @@ namespace OnlineMarket.Controllers
 
         }
 
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var OrderQ = await _orderService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(x => x.Id == id);
-            if (OrderQ == null) 
-            {
-                return NotFound();
-            }
-            ProductVM productVM = new ProductVM()
-            {
-                ProductName = OrderQ.Product.ProductName,
-                ProductDescription = OrderQ.Product.ProductDescription,
-                Price = OrderQ.Product.Price,
-                ProductPhoto = OrderQ.Product.ProductPhoto,
-                SubCategoryId = OrderQ.Product.SubCategoryId,
-                Id = OrderQ.Product.Id,
-                Quantity = OrderQ.Product.Quantity
-            };
-
-            return View(productVM);
-
-        }
-
-        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var order = await _orderService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(x => x.Id == id);
+            var order = await _orderService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(x => x.ProductId == id);
             if (order == null) 
             {
                 return NotFound();
             }
             await _orderService.Delete(order);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Get", "Basket");
         }
 
     }

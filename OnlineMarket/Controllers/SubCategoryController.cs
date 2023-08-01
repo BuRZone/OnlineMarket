@@ -71,11 +71,6 @@ namespace OnlineMarket.Controllers
                 productVMList.Add(productVM);
             }
 
-            //SubCategoryVM subCategoryVM = new SubCategoryVM();
-            //subCategoryVM.Id = subCat.Id;
-            //subCategoryVM.CategoryName = subCat.CategoryName;
-            //subCategoryVM.Product = productVMList;
-
             return View(productVMList);
         }
 

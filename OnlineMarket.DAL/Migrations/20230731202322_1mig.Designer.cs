@@ -12,7 +12,7 @@ using OnlineMarket.DAL;
 namespace OnlineMarket.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230730081346_1mig")]
+    [Migration("20230731202322_1mig")]
     partial class _1mig
     {
         /// <inheritdoc />

@@ -6,14 +6,14 @@
     
 
 
-             @foreach(var item in Model)
+             @foreach(var item in Model.OrderBy(x => x.Id))
              { 
-                     <p>
+
                          <form method="post"asp-controller="SubCategory" asp-action="GetProductsFromSubCategory">
                            <input type="hidden" name="id" value="@item.Id"/> 
-                           <button class="btn btn-primary btn-sm" id="SubCatbtn_@item.Id" style="width:90%">@item.CategoryName</button>
+                           <button class="btn btn-outline-primary" @*id="SubCatbtn_@item.Id"*@ style="width:90%;border:unset;"><font color="black">@item.CategoryName</font></button>
                          </form>
-                     </p>
+
              }
 
 

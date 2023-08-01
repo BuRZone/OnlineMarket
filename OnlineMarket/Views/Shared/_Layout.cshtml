@@ -17,8 +17,6 @@
 
       @await Component.InvokeAsync("Category")
 
-
-
 <body>
  
     <header>                   
@@ -95,10 +93,10 @@
              </div>
         </nav>
 
-        <nav class="navbar navbar-expand-lg bg-primary" style="height: 100px;padding-bottom:50px" data-bs-theme="dark">
-            <form class="d-flex m-lg-1" style="width:100%">
-                <input class="form-control me-sm-2" type="search" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        <nav class="navbar navbar-expand-lg bg-primary" style="height: 100px;padding-bottom:50px" data-bs-theme="light">
+            <form method="post" asp-controller="Product" asp-action="SearchProduct"  class="d-flex m-lg-1" style="width:100%">
+                <input name="searchString" class="form-control me-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" id="search1" type="submit">Search</button>
             </form>
         </nav>
         <nav class="navbar navbar-expand-lg bg-primary"
@@ -109,6 +107,7 @@
 
     <div class="container">
         <main role="main">
+            
             @RenderBody()
         </main>
     </div>
@@ -125,4 +124,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>    
-

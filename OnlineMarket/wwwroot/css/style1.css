@@ -97,17 +97,17 @@ nav1 ul::-webkit-scrollbar-thumb {
     top: -1000px;
     left: 300px;
     background: #1b1b1b;
-    transition: top 0.5s ease;
+    /*transition: top 0.5s ease;*/
     z-index: 10;
-    opacity: 0;
+    /*opacity: 0;*/
 }
 
     .sidebar2.show {
         left: 301px;
         top: 0px;
         opacity: 1;
-        transition-property: opacity;
-        transition-duration: 0.5s;
+        /*transition-property: opacity;
+        transition-duration: 0.5s;*/
     }
 
 .sidebar3 {

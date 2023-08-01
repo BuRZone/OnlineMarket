@@ -20,6 +20,7 @@ namespace OnlineMarket.Controllers
         {
 
             List<ProductVM> productVMList = new List<ProductVM>();
+            const int pageSize = 20;
             var productList = await _productService.GetAsync().ToListAsync();
             if (productList == null)
             {

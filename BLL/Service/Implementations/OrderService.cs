@@ -67,7 +67,7 @@ namespace OnlineMarket.BLL.Service.Implementations
                 {
                     DateCreated = orderVM.DateCreated,
                     BasketId = orderVM.BasketVMId,
-                    //Product = orderVM.ProductVM
+                    ProductId = orderVM.ProductVMId
                 };
                 await _baseRepository.CreateAsync(order);
 

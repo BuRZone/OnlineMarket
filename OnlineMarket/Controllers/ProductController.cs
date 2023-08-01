@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using OnlineMarket.BLL.Service.Implementations;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Product;
 
@@ -119,5 +121,57 @@ namespace OnlineMarket.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> SearchProduct(string searchString)
+        {
+            var productVMList = new List<ProductVM>();
+            var searchQ = await _productService.GetAsync().Where(x => x.ProductName.Contains(searchString)).Select(x => x).ToListAsync();
+            if (searchQ.Count() == 0)
+            {
+                
+                TempData["null"] = "ничего не найдено";
+                return View(productVMList);
+            }
+
+            foreach (var product in searchQ)
+            {
+                ProductVM productVM = new ProductVM();
+                productVM.ProductName = product.ProductName;
+                productVM.ProductDescription = product.ProductDescription;
+                productVM.Price = product.Price;
+                productVM.ProductPhoto = product.ProductPhoto;
+                productVM.SubCategoryId = product.SubCategoryId;
+                productVM.Id = product.Id;
+                productVM.Quantity = product.Quantity;
+                productVMList.Add(productVM);
+            }
+
+            return View(productVMList);
+        }
+
+        
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var product = await _productService.GetAsync().FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            ProductVM productVM = new ProductVM();
+            productVM.ProductName = product.ProductName;
+            productVM.ProductDescription = product.ProductDescription;
+            productVM.Price = product.Price;
+            productVM.ProductPhoto = product.ProductPhoto;
+            productVM.SubCategoryId = product.SubCategoryId;
+            productVM.Id = product.Id;
+            productVM.Quantity = product.Quantity;
+
+            return View(productVM);
+        }
     }
 }

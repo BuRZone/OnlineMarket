@@ -1,0 +1,37 @@
+﻿@using OnlineMarket.BLL.ViewModels.Product;
+@model List<ProductVM>
+
+
+<header>
+    <style>
+        .card_container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: minmax(100px, 380px);
+        }
+    </style>
+        @await Html.PartialAsync("_Notification")
+</header>
+
+
+<div class="card_container">
+
+    @foreach (var item in Model)
+    {
+        <div class="container" style="position:center;width:250px;max-height:400px;">
+            <div @*class="card text-white bg-secondary mb-3" style="max-width: 15rem;max-height:19rem;"*@>                
+                <div style="width:100%;height:300px; background-color:white; border-radius:15px 15px 0 0">
+                    <svg width="100%" height="100%" style="border-radius:15px 15px 15px 15px"> <image href="data:image/jpeg;base64,@Convert.ToBase64String(item?.ProductPhoto ?? Array.Empty<byte>())"
+                     width="100%" height="100%" style="overflow:hidden;border-radius:15px 15px 15px 15px" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"/>
+                     </svg>
+                </div>
+                <div class="card-body" style="background-color:white; border-radius:0 0 15px 15px"><font style="color: darkgray">
+                    <h6 class="card-title" style="max-width:100%;height:25px;padding-top:10px; padding-left:20px">@Html.DisplayFor(modelItem => item.Price)</h6>
+                    <p class="card-text" style="padding-left:20px;height:30px;overflow-y:hidden" >
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </p></font>
+                </div>
+            </div>
+        </div>
+    }
+</div>
