@@ -52,21 +52,6 @@ $.each($(btnId).on("mouseenter", function () {
 
 
 
-//    let $button = $(document.querySelector('#search1'))
-//    let $search = $(document.querySelector('[name="searchString"]'))
-
-//$search.addEventListener("input", function (a) {
-//        const value = a.target.value;
-//    if(value == null)
-//    {
-//        $button.click(function (e) {
-
-//            e.preventDefault();
-
-//        });
-//    }
-
-//    });
 
 
 
