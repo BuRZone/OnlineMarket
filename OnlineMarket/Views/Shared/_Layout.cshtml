@@ -133,7 +133,12 @@
     var _inCallback = false;
     const urlParams = new URLSearchParams(window.location.search);
     const pageIndex = urlParams.get('pageNumber');
-
+    var targetUrl = '';
+    var currentUrl = new URL(window.location);
+    if(currentUrl.pathname == '/')
+    {
+        currentUrl = '/Home/Index?';
+    }
     function loadItems() {
         if (page > -1 && !_inCallback) {
             _inCallback = true;
@@ -142,7 +147,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: `/Home/Index?scrolled=${page}&pageNumber=${pageIndex}`,
+                url: currentUrl + `&scrolled=${page}&pageNumber=${pageIndex}`,
                 success: function (data, textstatus) {
                     if (data != '') {
                         $("#scrolList").append(data);

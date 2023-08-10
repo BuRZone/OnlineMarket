@@ -1,26 +1,109 @@
 ﻿@using OnlineMarket.BLL.ViewModels.Category;
+@using OnlineMarket.BLL.ViewModels.Product;
 @model List<SubCategoryVM>
+@{
+    List<ProductVM> productVMs = new List<ProductVM>();
+    productVMs = ViewBag.ProductVM;
+    bool isAjaxCall = Context.Request.Headers["x-requested-with"] == "XMLHttpRequest";
 
-<p>SubCategory List</p>
+    Layout = isAjaxCall ? null : "_Layout";
 
+    Pager pager = new Pager();
+    int pageNo = 1;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
 
-<table class="table">
-    <tbody>
-        @foreach (var item in Model)
-        {
-
-            <tr>
-                <td>
-                    @item.CategoryName
-                </td>
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-
+    }
+}
+<header>
+    <style>
+        .card_container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-auto-rows: minmax(100px, 380px);
         }
-    </tbody>
-</table>
+    </style>
+
+</header>
+@if (!isAjaxCall)
+{  
+    <h3>@ViewData["Category"]</h3>
+}
+    <div class="container">
+        <div class="row">
+            @if (!isAjaxCall)
+            { 
+                <div class="col-lg-3" >
+                    <ul style="margin-left:-30px;">
+                      
+                        @foreach (var item in Model)
+                        { 
+                            <li>
+                                <a class="btn btn-outline-light btn-sm" style="border:none"><font style="font-size:larger"> @item.CategoryName</font></a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+                <div class="col-lg">
+                    <div id="scrolList">
+                        <div class="card_container">
+                            @{
+                                Random rnd = new Random();
+                            }
+                            @foreach (var item in productVMs.OrderBy(x =>rnd.Next()))
+                            {
+                                <div class="container" style="position:center;width:250px;max-height:400px;">              
+                                    <div style="width:100%;height:300px; background-color:white; border-radius:15px 15px 0 0">
+                                        <svg width="100%" height="100%" style="border-radius:15px 15px 15px 15px"> <image href="data:image/jpeg;base64,@Convert.ToBase64String(item?.ProductPhoto ?? Array.Empty<byte>())"
+                                            width="100%" height="100%" style="overflow:hidden;border-radius:15px 15px 15px 15px" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"/>
+                                        </svg>
+                                    </div>
+                                    <div class="card-body" style="background-color:white; border-radius:0 0 15px 15px"><font style="color: darkgray">
+                                
+                                        <h6 style="height:25px;padding-top:8px; padding-left:20px;">@Html.DisplayFor(modelItem => item.Price) руб.<button name="n_@item.Id" id="@item.Id" class="btn btn-primary btn-sm" style="margin-left:30px">В Корзину</button></h6>
+                                            <p class="card-text" style="padding-left:20px;height:30px;overflow:hidden;white-space:nowrap;background: -webkit-linear-gradient(180deg,#eee, #333);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                                               Продавец / @Html.DisplayFor(modelItem => item.ProductName)
+                                            </p></font>
+                                    </div>
+                                </div>
+                    
+                            }
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+@if (!isAjaxCall)
+{
+    <partial name="_Pager" model="@pager"/>
+}
+
+
+<script>
+    $('[name^="n_"]').on('click', function (e) {
+
+        e.preventDefault();
+
+        var ID = $(this).attr("id");
+
+
+        $.ajax({
+  method: "POST",
+  url: "/Basket/AddToCart",
+  data: {id:ID}
+})
+  .done(function() {
+    alert( "Data Saved");
+  });
+
+    });
+</script>
+
+
+
+
+

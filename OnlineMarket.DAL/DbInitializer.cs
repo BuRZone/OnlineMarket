@@ -1,31 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using OnlineMarket.DAL.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using OnlineMarket.DAL.Entity;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using static OnlineMarket.DAL.ApplicationDbContext;
 
 namespace OnlineMarket.DAL
 {
     public static class DbInitializer
     {
         public static void Initialize(ApplicationDbContext context)
-        { 
-                if (context.Users.Any())
-                {
-                    return;
-                }
-                context.Users.AddRange(
-                    new User() { /*Id = 1,*/ UserName = "Test1@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456") },
-                    new User() { /*Id = 2,*/ UserName = "Test2@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456") },
-                    new User() { /*Id = 3,*/ UserName = "Test3@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456") },
-                    new User() { /*Id = 4,*/ UserName = "Test4@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456") },
-                    new User() { /*Id = 5,*/ UserName = "burbon@mail.com", Role = Enum.Role.Admin, Password = HashPasswordHelper.HashPassowrd("123456") }
-                    );
+        {
+            if (context.Users.Any())
+            {
+                return;
+            }
+            context.Users.AddRange(
+                new User() { /*Id = 1,*/ UserName = "Test1@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456") },
+                new User() { /*Id = 2,*/ UserName = "Test2@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456") },
+                new User() { /*Id = 3,*/ UserName = "Test3@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456") },
+                new User() { /*Id = 4,*/ UserName = "Test4@mail.com", Role = Enum.Role.User, Password = HashPasswordHelper.HashPassowrd("123456") },
+                new User() { /*Id = 5,*/ UserName = "burbon@mail.com", Role = Enum.Role.Admin, Password = HashPasswordHelper.HashPassowrd("123456") }
+                );
             context.SaveChanges();
 
             context.Baskets.AddRange(
@@ -898,6 +891,216 @@ namespace OnlineMarket.DAL
                 ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.1.Бескаркасная мебель\Бескаркасная мебель в интернет-магазине Wildberries_files\1(9).webp"),
                 ProductDescription = "Кресло трансформер. Кровать. Пуф. Мини диван бескаркасный. Мечта. Любовь. Как не назови такую мебель, но это незаменимый вариант для любой комнаты – детской, гостиной, для балкона, в спальню и даже на дачу. Дополнительное спальное место необходимо всегда для гостей, родственников и ребенка. Можно соорудить шалаш для игр или использовать, как коврик для йоги. Фантазия использования этого чудесного бескаркасного матраса безгранична! Поставим два кресла рядом и у вас получится диван для всей семьи, вообще в этих трансформерах классно все. Удобно сидеть, спать, лежать, играть. Он легкий, можно брать в поход и это еще не все плюсы. Мы изготавливаем этот мини диван из эластичной и гипоаллергенной пены, благодаря чему мягкий пуфик будет служить вам долго и не деформируется. Диванчик имеет идеальные размеры высоту 60см и глубину 80см. Спальное место в разложенном виде 69*180см. как полноценная односпальная кровать. Большой выбор интересных расцветок и принтов в стиле IKEA. Обивка в ткани велюр создаст уютную атмосферу и позволит комфортно провести время Вам и вашим гостям. При заказе двух и более пуфов, можно комбинировать между собой по цветам. Кресло раскладное имеет съемный чехол в том числе и на подушке, это позволяет легко ухаживать за ним и поддерживать в чистоте. Цвет обивки изделия может отличаться от цвета на фотографии товара. Это связано с разной цветопередачей мониторов устройств, а также от партии поставляемой ткани.Рассмотрите данный предмет мебели, как подарок на новоселье или день рождения ребенку, маме, друзьям."
             },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1.webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(1).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(2).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(3).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(4).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(5).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(6).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(7).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(8).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(9).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(10).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(11).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(12).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(13).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(14).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(15).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(16).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(17).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(18).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(19).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
+            new Product()
+            {
+                //Id = 3,
+                ProductName = "Детский стол и стул, комплект мебели",
+                Price = 10205,
+                Quantity = 500,
+                SubCategoryId = 175,
+                ProductPhoto = File.ReadAllBytes(@"D:\VS_Projects\OnlineMarket\For_Database\4.Мебель\4.2.Детская мебель\Детская мебель_files\1(20).webp"),
+                ProductDescription = "Комплект мебели для ребенка - детский стол 40х60 см и стул мишка. Подходит для детей от полутора лет и до роста 130 см. Столешница столика, сиденье и спинка стульчика сделаны из ЛДСП, ножки из массива березы. Острых углов у мебели нет."
+            },
              new Product()
              {
                  //Id = 1,
@@ -1493,20 +1696,20 @@ namespace OnlineMarket.DAL
 
             context.SaveChanges();
         }
-            
-    }
-        public static class HashPasswordHelper
-        {
-            public static string HashPassowrd(string password)
-            {
-                using (var sha256 = SHA256.Create())
-                {
-                    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                    var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
 
-                    return hash;
-                }
+    }
+    public static class HashPasswordHelper
+    {
+        public static string HashPassowrd(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+                return hash;
             }
         }
+    }
 }
 

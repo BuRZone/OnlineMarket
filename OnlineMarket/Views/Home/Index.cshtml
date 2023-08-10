@@ -24,7 +24,7 @@
             grid-auto-rows: minmax(100px, 380px);
         }
     </style>
-
+    
 </header>
 
 
@@ -80,5 +80,46 @@
     });
 </script>
 
+@*<script>
+    $(function () {
 
+    var page = 0;
+    var _inCallback = false;
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageIndex = urlParams.get('pageNumber');
+
+    function loadItems() {
+        if (page > -1 && !_inCallback) {
+            _inCallback = true;
+            page++;
+
+
+            $.ajax({
+                type: 'GET',
+                url: `/Home/Index?scrolled=${page}&pageNumber=${pageIndex}`,
+                success: function (data, textstatus) {
+                    if (data != '') {
+                        $("#scrolList").append(data);
+                    }
+                    else {
+                        page = -1;
+                        
+                    }
+                    _inCallback = false;
+                }
+            });
+        }
+    }
+    $(window).scroll(function () {
+        const scrolled = window.scrollY
+        const threshold = $(document).height() - $(window).height() / 4
+        const position = scrolled + $(window).height()
+
+        if (position >= threshold) {
+
+            loadItems();
+        }
+    });
+});
+</script>*@
 

@@ -12,7 +12,7 @@
 
         public Pager()
         {
-            
+
         }
         public Pager(int totalItems, int page, int pageSize = 10)
         {
@@ -43,5 +43,5 @@
             EndPage = endPage;
         }
     }
-    
+
 }

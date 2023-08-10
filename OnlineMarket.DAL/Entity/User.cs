@@ -1,6 +1,5 @@
 ﻿using OnlineMarket.DAL.Enum;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineMarket.DAL.Entity
 {

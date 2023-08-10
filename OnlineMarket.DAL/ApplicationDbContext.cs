@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineMarket.DAL.Entity;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace OnlineMarket.DAL
 {
@@ -65,10 +63,10 @@ namespace OnlineMarket.DAL
             {
                 builder.ToTable(nameof(Product));
                 builder.HasKey("Id");
-                builder.HasOne(p => p.SubCategory).WithMany(p =>p.Product);
-               
+                builder.HasOne(p => p.SubCategory).WithMany(p => p.Product);
+
             });
-    
+
             modelBuilder.Entity<Order>(builder =>
             {
                 builder.ToTable(nameof(Order));

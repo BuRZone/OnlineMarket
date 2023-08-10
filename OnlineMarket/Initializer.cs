@@ -1,6 +1,5 @@
 ﻿using OnlineMarket.BLL.Service.Implementations;
 using OnlineMarket.BLL.Service.Interfaces;
-using OnlineMarket.DAL;
 using OnlineMarket.DAL.Entity;
 using OnlineMarket.DAL.Interfaces;
 using OnlineMarket.DAL.SQLRepositories;

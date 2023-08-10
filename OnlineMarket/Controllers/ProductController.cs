@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using OnlineMarket.BLL.Service.Implementations;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Product;
 
@@ -129,7 +127,7 @@ namespace OnlineMarket.Controllers
             var searchQ = await _productService.GetAsync().Where(x => x.ProductName.Contains(searchString)).Select(x => x).ToListAsync();
             if (searchQ.Count() == 0)
             {
-                
+
                 TempData["null"] = "ничего не найдено";
                 return View(productVMList);
             }
@@ -150,7 +148,7 @@ namespace OnlineMarket.Controllers
             return View(productVMList);
         }
 
-        
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

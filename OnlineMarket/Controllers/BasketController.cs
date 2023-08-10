@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Order;
 using OnlineMarket.BLL.ViewModels.Product;
-using OnlineMarket.DAL.Entity;
 
 namespace OnlineMarket.Controllers
 {
@@ -84,7 +83,7 @@ namespace OnlineMarket.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var order = await _orderService.GetAsync().Include(x => x.Product).FirstOrDefaultAsync(x => x.ProductId == id);
-            if (order == null) 
+            if (order == null)
             {
                 return NotFound();
             }

@@ -1,8 +1,7 @@
 ﻿@model Pager
 
-
     <div class="container">
-        @if (Model.TotalPages > 0)
+        @if (Model.TotalPages > 1)
         {
             <ul class="pagination">
 
@@ -10,10 +9,10 @@
                 @if (Model.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageNumber="1">First</a>
+                        <a class="page-link"   asp-route-pageNumber="1">First</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageNumber="@(Model.CurrentPage - 1)">Previous</a>
+                        <a class="page-link"  asp-route-pageNumber="@(Model.CurrentPage - 1)">Previous</a>
                     </li>
                 }
 
@@ -22,17 +21,17 @@
                 @for (var pge = Model.StartPage; pge <= Model.EndPage; pge++)
                 {
                     <li class="page-item @(pge == Model.CurrentPage ? "active" : "")" >
-                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageNumber="@pge">@pge</a>
+                        <a class="page-link"  asp-route-pageNumber="@pge">@pge</a>
                     </li>
                 }
 
                 @if (Model.CurrentPage < Model.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageNumber="@(Model.CurrentPage + 1)">Next</a>
+                        <a class="page-link"  asp-route-pageNumber="@(Model.CurrentPage + 1)">Next</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pageNumber="@(Model.TotalPages)">Last</a>
+                        <a class="page-link"  asp-route-pageNumber="@(Model.TotalPages)">Last</a>
                     </li>
 
                 }

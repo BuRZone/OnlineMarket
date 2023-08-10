@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Category;
-using OnlineMarket.BLL.ViewModels.Product;
 
 namespace OnlineMarket.Controllers
 {
@@ -86,6 +85,6 @@ namespace OnlineMarket.Controllers
             return RedirectToAction("GetCategory");
         }
 
-        
+
     }
 }

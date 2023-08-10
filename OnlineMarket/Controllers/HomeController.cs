@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
 using OnlineMarket.BLL.ViewModels.Product;
-using OnlineMarket.DAL.Entity;
 using OnlineMarket.Models;
 using System.Diagnostics;
-using System.Drawing.Printing;
 
 namespace OnlineMarket.Controllers
 {
@@ -17,24 +14,24 @@ namespace OnlineMarket.Controllers
         private readonly ICategoryService _categoryService;
 
         public int PageNumber { get; set; }
-  
+
         public HomeController(IProductService productService, ICategoryService categoryService)
         {
             _productService = productService;
             _categoryService = categoryService;
         }
-        
+
         [HttpGet]
-        public async Task<IActionResult> Index(int? scrolled, int pageNumber=1)
+        public async Task<IActionResult> Index(int? scrolled, int pageNumber = 1)
         {
             List<ProductVM> productVMList = new List<ProductVM>();
             const int PageSize = 12;
             int recsCount = _productService.GetAsync().Count();
-            var pager = new Pager(recsCount, pageNumber, PageSize*2);
+            var pager = new Pager(recsCount, pageNumber, PageSize * 2);
             this.ViewBag.Pager = pager;
 
             int scrollPage = scrolled ?? 0;
-            int itemsToSkip = (pageNumber -1) * PageSize;
+            int itemsToSkip = (pageNumber - 1) * PageSize;
             PageNumber = pageNumber;
 
 
@@ -58,7 +55,7 @@ namespace OnlineMarket.Controllers
                     productVM.Quantity = product.Quantity;
                     productVMList.Add(productVM);
                 }
-                
+
                 return View(productVMList);
             }
             else if (scrollPage < 2 && PageNumber != 1)

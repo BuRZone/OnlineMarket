@@ -9,40 +9,10 @@
              @foreach(var item in Model.OrderBy(x => x.Id))
              { 
 
-                         <form method="post"asp-controller="SubCategory" asp-action="GetProductsFromSubCategory">
-                           <input type="hidden" name="id" value="@item.Id"/> 
+                         <form method="post"asp-controller="SubCategory" asp-action="GetProductsFromSubCategory" asp-route-id="@item.Id">
                            <button class="btn btn-outline-primary" @*id="SubCatbtn_@item.Id"*@ style="width:90%;border:unset;"><font color="black">@item.CategoryName</font></button>
                          </form>
 
              }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-@*<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header" style="height:60px">
-                <h3 class="offcanvas-title" id="offcanvasExampleLabel">Categories</h3>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                 @foreach(var item in Model)
-                 {
-                     <p>
-                         <form method="post"asp-controller="SubCategory" asp-action="GetSubCategory">
-                           <input type="hidden" name="id" value="@item.Id"/> 
-                           <button class="btn btn-primary" style="width:250px">@item.CategoryName</button>
-                         </form>
-                     </p>  
-                 }
-            </div>
-        </div>*@
