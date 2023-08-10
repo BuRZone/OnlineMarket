@@ -28,8 +28,14 @@
 
 </header>
 @if (!isAjaxCall)
-{  
+{   
+    <p><ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/Home/Index">Главная</a></li>
+  <li class="breadcrumb-item"><a>@ViewData["Category"]</a></li>
+</ol></p>
     <h3>@ViewData["Category"]</h3>
+
+
 }
     <div class="container">
         <div class="row">
@@ -41,13 +47,22 @@
                         @foreach (var item in Model)
                         { 
                             <li>
-                                <a class="btn btn-outline-light btn-sm" style="border:none"><font style="font-size:larger"> @item.CategoryName</font></a>
+                                <a href="/SubCategory/GetProductsFromSubCategory/@item.Id?" class="btn btn-outline-light btn-sm" style="border:none"><font style="font-size:larger"> @item.CategoryName</font></a>
                             </li>
                         }
                     </ul>
                 </div>
             }
                 <div class="col-lg">
+                    @if (!isAjaxCall)
+            {
+                @if (productVMs.Count() == 0)
+                {
+                    <h3>--страница в разработке--</h3>
+
+                }
+            }
+
                     <div id="scrolList">
                         <div class="card_container">
                             @{
@@ -55,6 +70,7 @@
                             }
                             @foreach (var item in productVMs.OrderBy(x =>rnd.Next()))
                             {
+
                                 <div class="container" style="position:center;width:250px;max-height:400px;">              
                                     <div style="width:100%;height:300px; background-color:white; border-radius:15px 15px 0 0">
                                         <svg width="100%" height="100%" style="border-radius:15px 15px 15px 15px"> <image href="data:image/jpeg;base64,@Convert.ToBase64String(item?.ProductPhoto ?? Array.Empty<byte>())"

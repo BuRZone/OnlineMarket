@@ -19,8 +19,6 @@ namespace OnlineMarket.Controllers
             _productService = productService;
         }
 
-
-        public int PageNumber { get; set; }
         [HttpGet]
         public async Task<IActionResult> GetSubCategory(int? id, int? scrolled, int pageNumber = 1)
         {
@@ -32,7 +30,7 @@ namespace OnlineMarket.Controllers
 
             int scrollPage = scrolled ?? 0;
             int itemsToSkip = (pageNumber - 1) * PageSize;
-            PageNumber = pageNumber;
+            
 
             var category = _categoryService.GetAsync().FirstOrDefault(x => x.Id == id);
 
@@ -55,7 +53,7 @@ namespace OnlineMarket.Controllers
                 subCatVMList.Add(subCategoryVM);
             }
 
-            if (scrollPage < 2 && PageNumber == 1)
+            if (scrollPage < 2 && pageNumber == 1)
             {
                 itemsToSkip = scrollPage * PageSize;
                 var productQ = await _productService.GetAsync().Where(x => x.SubCategory.CategoryId == id).OrderBy(x => x.Id).Skip(itemsToSkip).Take(PageSize).ToListAsync();
@@ -76,11 +74,11 @@ namespace OnlineMarket.Controllers
                 return View(subCatVMList);
             }
 
-            else if (scrollPage < 2 && PageNumber != 1)
+            else if (scrollPage < 2 && pageNumber != 1)
             {
 
                 scrollPage = scrolled == null ? 0 : PageSize;
-                var i = PageNumber;
+                var i = pageNumber;
 
 
                 itemsToSkip = scrollPage + 2 * PageSize * (i - 1);
@@ -105,30 +103,70 @@ namespace OnlineMarket.Controllers
         }
 
 
-        public async Task<IActionResult> GetProductsFromSubCategory(int Id)
+        public async Task<IActionResult> GetProductsFromSubCategory(int? id, int? scrolled, int pageNumber = 1)
         {
-            var subCat = await _subCategoryService.GetAsync().Include(x => x.Product).
-                FirstOrDefaultAsync(m => m.Id == Id);
-            if (subCat == null)
-            {
-                return NotFound();
-            }
+            const int PageSize = 12;
+            int recsCount = _productService.GetAsync().Where(x => x.SubCategoryId == id).Count();
+            var pager = new Pager(recsCount, pageNumber, PageSize * 2);
+            this.ViewBag.Pager = pager;
             var productVMList = new List<ProductVM>();
+            int scrollPage = scrolled ?? 0;
+            int itemsToSkip = (pageNumber - 1) * PageSize;
 
-            foreach (var product in subCat.Product)
+            var category = await _categoryService.GetAsync().Include(x => x.SubCategory).FirstOrDefaultAsync(x => x.SubCategory.Any(x => x.Id == id));
+            ViewData["Category"] = category;
+            var sub = category.SubCategory.Where(x => x.Id == id).FirstOrDefault();
+            ViewData["SubCategory"] = sub.CategoryName;
+
+
+            if (scrollPage < 2 && pageNumber == 1)
             {
-                ProductVM productVM = new ProductVM();
-                productVM.ProductName = product.ProductName;
-                productVM.ProductDescription = product.ProductDescription;
-                productVM.Price = product.Price;
-                productVM.ProductPhoto = product.ProductPhoto;
-                productVM.SubCategoryId = product.SubCategoryId;
-                productVM.Id = product.Id;
-                productVM.Quantity = product.Quantity;
-                productVMList.Add(productVM);
-            }
+                itemsToSkip = scrollPage * PageSize;
+                var productQ = await _productService.GetAsync().Where(x => x.SubCategoryId == id).OrderBy(x => x.Id).Skip(itemsToSkip).Take(PageSize).ToListAsync();
+                
 
-            return View(productVMList);
+                foreach (var product in productQ)
+                {
+                    ProductVM productVM = new ProductVM();
+                    productVM.ProductName = product.ProductName;
+                    productVM.ProductDescription = product.ProductDescription;
+                    productVM.Price = product.Price;
+                    productVM.ProductPhoto = product.ProductPhoto;
+                    productVM.SubCategoryId = product.SubCategoryId;
+                    productVM.Id = product.Id;
+                    productVM.Quantity = product.Quantity;
+                    productVMList.Add(productVM);
+                }
+
+                return View(productVMList);
+            }
+            else if (scrollPage < 2 && pageNumber != 1)
+            {
+
+                scrollPage = scrolled == null ? 0 : PageSize;
+                var i = pageNumber;
+
+
+                itemsToSkip = scrollPage + 2 * PageSize * (i - 1);
+                var productQ = await _productService.GetAsync().Where(x => x.SubCategoryId == id).OrderBy(x => x.Id).Skip(itemsToSkip).Take(PageSize).ToListAsync();
+
+                foreach (var product in productQ)
+                {
+                    ProductVM productVM = new ProductVM();
+                    productVM.ProductName = product.ProductName;
+                    productVM.ProductDescription = product.ProductDescription;
+                    productVM.Price = product.Price;
+                    productVM.ProductPhoto = product.ProductPhoto;
+                    productVM.SubCategoryId = product.SubCategoryId;
+                    productVM.Id = product.Id;
+                    productVM.Quantity = product.Quantity;
+                    productVMList.Add(productVM);
+                }
+
+                return View(productVMList);
+            }
+            return View();
+
         }
 
     }

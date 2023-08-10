@@ -9,7 +9,7 @@
              @foreach(var item in Model.OrderBy(x => x.Id))
              { 
 
-                         <form method="post"asp-controller="SubCategory" asp-action="GetProductsFromSubCategory" asp-route-id="@item.Id">
+                         <form method="get" asp-controller="SubCategory" asp-action="GetProductsFromSubCategory" asp-route-id="@item.Id">
                            <button class="btn btn-outline-primary" @*id="SubCatbtn_@item.Id"*@ style="width:90%;border:unset;"><font color="black">@item.CategoryName</font></button>
                          </form>
 

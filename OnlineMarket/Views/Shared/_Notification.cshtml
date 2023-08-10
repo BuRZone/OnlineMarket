@@ -1,5 +1,10 @@
 ﻿@if(TempData["null"] != null)
 {
     <h4>поиск: @TempData["null"]</h4>
-}   
+}
+@if (TempData["success"] != null)
+{
+    <h4>поиск: @TempData["success"]</h4>
+    
+}
 

@@ -1,6 +1,20 @@
 ﻿@using OnlineMarket.BLL.ViewModels.Product;
 @model List<ProductVM>
 
+    @{
+     bool isAjaxCall = Context.Request.Headers["x-requested-with"] == "XMLHttpRequest";
+
+    Layout = isAjaxCall ? null : "_Layout";
+
+    Pager pager = new Pager();
+    int pageNo = 1;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+
+    }
+}
 
 <header>
     <style>
@@ -10,28 +24,60 @@
             grid-auto-rows: minmax(100px, 380px);
         }
     </style>
-        @await Html.PartialAsync("_Notification")
+
 </header>
 
+    @if (!isAjaxCall)
+{
+       <h3>@ViewData["search"]</h3> 
+}
 
+<div id="scrolList">
 <div class="card_container">
-
-    @foreach (var item in Model)
+    @{
+        Random rnd = new Random();
+    }
+    @foreach (var item in Model.OrderBy(x =>rnd.Next()))
     {
-        <div class="container" style="position:center;width:250px;max-height:400px;">
-            <div @*class="card text-white bg-secondary mb-3" style="max-width: 15rem;max-height:19rem;"*@>                
+         <div class="container" style="position:center;width:250px;max-height:400px;">              
                 <div style="width:100%;height:300px; background-color:white; border-radius:15px 15px 0 0">
                     <svg width="100%" height="100%" style="border-radius:15px 15px 15px 15px"> <image href="data:image/jpeg;base64,@Convert.ToBase64String(item?.ProductPhoto ?? Array.Empty<byte>())"
                      width="100%" height="100%" style="overflow:hidden;border-radius:15px 15px 15px 15px" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"/>
                      </svg>
                 </div>
                 <div class="card-body" style="background-color:white; border-radius:0 0 15px 15px"><font style="color: darkgray">
-                    <h6 class="card-title" style="max-width:100%;height:25px;padding-top:10px; padding-left:20px">@Html.DisplayFor(modelItem => item.Price)</h6>
-                    <p class="card-text" style="padding-left:20px;height:30px;overflow-y:hidden" >
-                        @Html.DisplayFor(modelItem => item.ProductName)
+                    
+                    <h6 style="height:25px;padding-top:8px; padding-left:20px;">@Html.DisplayFor(modelItem => item.Price) руб.<button name="n_@item.Id" id="@item.Id" class="btn btn-primary btn-sm" style="margin-left:30px">В Корзину</button></h6>
+                    <p class="card-text" style="padding-left:20px;height:30px;overflow:hidden;white-space:nowrap;background: -webkit-linear-gradient(180deg,#eee, #333);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                     Продавец / @Html.DisplayFor(modelItem => item.ProductName)
                     </p></font>
                 </div>
-            </div>
         </div>
     }
 </div>
+</div>
+
+@if (!isAjaxCall)
+{
+    <partial name="_Pager" model="@pager"/>
+}
+
+<script>
+    $('[name^="n_"]').click( function (e) {
+
+        e.preventDefault();
+
+        var ID = $(this).attr("id");
+
+
+        $.ajax({
+  method: "POST",
+  url: "/Basket/AddToCart",
+  data: {id:ID}
+})
+  .done(function( msg ) {
+    alert( "Data Saved: " + msg );
+  });
+
+    });
+</script>
