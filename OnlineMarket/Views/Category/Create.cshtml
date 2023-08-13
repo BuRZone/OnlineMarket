@@ -1,8 +1,10 @@
 ﻿@using OnlineMarket.BLL.ViewModels.Category;
 
 @model CategoryVM
-
-<p>Create new Category</p>
+@{
+    List<CategoryVM> catList = ViewBag.Category;
+}
+<h3>Create new Category</h3>
 
 <form asp-action="Create" method="post">
 
@@ -11,11 +13,17 @@
         <div class="form-group col-md-4">
             <label asp-for="@Model.CategoryName" class="col-form-label"></label>
             <input type="text" class="form-control" asp-for="@Model.CategoryName">
-            <span asp-validation-for="@Model.CategoryName" class="text-danger"></span>
+            <span asp-validation-for="@Model.CategoryName" class="text-primary"></span>
         </div>
-        <div class="form-group col-md-4">
-            <label for="exampleSelect2" class="col-form-label">Exist Categories</label>
-            <select multiple="" class="form-select" id="exampleSelect2" asp-items="ViewBag.Category"></select>
+        <div class="form-group col-md-4" style="height:500px">
+            <label for="exampleSelect2" class="col-form-label">Категории</label>
+            <ul>
+                @foreach(var item in catList)
+                {
+                    <li>@item.CategoryName</li>
+                }
+            </ul>
+            
         </div>
     </div>
     <p></p>

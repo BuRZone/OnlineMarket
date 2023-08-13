@@ -1,49 +1,146 @@
-﻿@using OnlineMarket.BLL.ViewModels.Product;
+﻿@using OnlineMarket.BLL.ViewModels.Category;
+@using OnlineMarket.BLL.ViewModels.Product;
 @model ProductVM
+
+
+<header>
+    <style>
+        .card_container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: minmax(100px, 380px);
+        }
+    </style>
+    
+</header>
 
 <form asp-action="Create" method="post" enctype="multipart/form-data">
 
     <div asp-validation-summary="ModelOnly" style="font-size:23px; font-family:Impact, serif" class="text-danger text-center"></div>
     <div class="row">
-        <div class="form-group col-md-3">
-            <label asp-for="@Model.ProductName" class="col-form-label"></label>
-            <input type="text" class="form-control" asp-for="@Model.ProductName">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.ProductName" class="col-form-label" ></label>
+            <input type="text" id="textcontent" class="form-control" asp-for="@Model.ProductName">
             <span asp-validation-for="@Model.ProductName" class="text-danger"></span>
         </div>
 
-        <div class="form-group col-md-3">
-            <label asp-for="@Model.SubCategoryId" class="col-form-label">Category select</label>
-            <select asp-for="@Model.SubCategoryId" class="form-select" asp-items="ViewBag.Category"><option value="">---All---</option></select>
+        <div class="form-group col-md-4">
+            <label class="col-form-label">Category select</label>
+            <select asp-items="@ViewBag.Category" id="categoryId"  class="form-select">
+                <option value="">---All---</option>
+
+            </select>
+            <span asp-validation-for="@Model.SubCategoryId" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.SubCategoryId" class="col-form-label">SubCategory select</label>
+            <select asp-for="SubCategoryId" class="form-select" id="SubCategoryId">
+                <option value="">---All---</option>
+                    
+             </select>
             <span asp-validation-for="@Model.SubCategoryId" class="text-danger"></span>
         </div>
         <div class="form-group col-md-3">
             <label asp-for="@Model.Quantity" class="col-form-label"></label>
-            <input type="text" class="form-control" asp-for="@Model.Quantity" />
+            <input type="text" class="form-control" asp-for="@Model.Quantity"/>
 
             <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
 
         </div>
         <div class="form-group col-md-3">
             <label asp-for="@Model.Price" class="col-form-label"></label>
-            <input type="text" class="form-control" asp-for="@Model.Price" />
+            <input id="pricecontent" type="text" class="form-control" asp-for="@Model.Price" />
             <span asp-validation-for="@Model.Price" class="text-danger"></span>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-md-12">
-            <label asp-for="@Model.ProductDescription" class="col-form-label"></label>
-            <input type="text" class="form-control" asp-for="@Model.ProductDescription">
-            <span asp-validation-for="@Model.ProductDescription" class="text-danger"></span>
+        <div class="form-group col-md-6">
+                <label asp-for="@Model.ProductDescription" class="col-form-label"></label>
+                <textarea  class="form-control" asp-for="@Model.ProductDescription" rows="5"></textarea>
+                <span asp-validation-for="@Model.ProductDescription" class="text-danger" ></span>
+
+
+            <label class="col-form-label">Загрузите фото товара</label>
+            <input asp-for="@Model.ProductformFile" class="form-control" type="file" accept="image/jpeg, image/png" id="inputFile">
+            <span asp-validation-for="@Model.ProductformFile" class="text-danger"></span>
+
+        </div>
+        <div class="col-md">
+            <label asp-for="@Model.ProductPhoto" class="col-form-label">Изображение</label>
+                <div class="card_container">
+                    <div class="container" style="position:center;width:250px;max-height:400px;">              
+                            <div style="width:100%;height:300px; background-color:white; border-radius:15px 15px 0 0;">
+                                <img id="divImageMediaPreview" 
+                                    width="100%" height="100%" style="overflow:hidden;border-radius:15px 15px 15px 15px;" focusable="false" role="img" preserveAspectRatio="xMidYMid slice"/>
+                    
+                            </div>
+                            <div class="card-body" style="background-color:white; border-radius:0 0 15px 15px"><font style="color: darkgray">
+                                
+                                <h6 style="height:25px;padding-top:8px; padding-left:20px;" id="showprice"></h6>
+                                <p class="card-text" id="showtext"  style="padding-left:20px;height:30px;overflow:hidden;white-space:nowrap;background: -webkit-linear-gradient(180deg,#eee, #333);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                                 Продавец/ 
+                                </p></font>
+                            </div>
+                    </div>
+                </div>      
         </div>
     </div>
 
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label class="col-form-label">Изображение</label>
-            <input asp-for="@Model.ProductformFile" class="form-control" type="file" accept="image/jpeg, image/png">
-            <span asp-validation-for="@Model.ProductformFile" class="text-danger"></span>
-        </div>
-    </div>
     <p></p>
     <button class="btn btn-primary">Отправить</button>
 </form>
+
+<script>
+    $("#inputFile").change(function () {
+    if (typeof (FileReader) != "undefined") {
+        var dvPreview = $("#divImageMediaPreview");
+        dvPreview.html("");            
+        $($(this)[0].files).each(function () {
+            var file = $(this);                
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = $("#divImageMediaPreview");
+                    img.attr("src", e.target.result);
+                    dvPreview.append(img);
+                }
+                reader.readAsDataURL(file[0]);                
+        });
+    } else {
+        alert("This browser does not support HTML5 FileReader.");
+    }
+});
+</script>
+<script>
+$(document).ready(function(){
+    $('#textcontent').keyup(function(){
+        $('#showtext').html('Продавец/' + $(this).val());
+    });
+});
+$(document).ready(function(){
+    $('#pricecontent').keyup(function(){
+        $('#showprice').html($(this).val() + ' руб.');
+    });
+});
+</script>
+
+
+<script>
+    $('#categoryId').change(function(){
+        getSubCategory();
+    });
+    var getSubCategory = function(){
+    
+        $.ajax({
+                method: "get",
+                url: "/Product/SelectSubCategory",
+                data:{id: $('#categoryId').val()},
+                success: function(data){
+                    $(data).each(
+                        function(index,item){
+                            $('#SubCategoryId').append('<option value="'+item.id+'">'+ item.categoryName +'</option>');
+                        }
+                    );
+                }
+        });
+    }
+</script>

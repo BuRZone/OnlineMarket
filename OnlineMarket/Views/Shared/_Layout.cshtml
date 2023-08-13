@@ -28,65 +28,54 @@
                       </button>
                         <div class="overlay"></div>
                 </div>
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">OnlineMarket </a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><font style="font-size:40px">OnlineMarket</font></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Home" asp-action="Index">
-                                Home
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Category" asp-action="GetCategory">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Product" asp-action="GetProduct">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Category" asp-action="GetCategory">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Product" asp-action="GetProduct">Product</a>
+                            </li>
+                        }
                     </ul>
                 
                     @if (User.Identity.IsAuthenticated)
                     {
-
-                        <form method="post" asp-controller="Account" asp-action="Logout" class="nav-link">
-                            <button type="submit" style="background-color:unset;border:none;">
-                            <i class="bi bi-person" style="font-size: 2.5em;padding-left:0.05em"></i>
-                            <p style="margin-top:-0.9em;">Logout</p>
-                            </button>
-                        </form>
-                            <div><a asp-controller="Basket" asp-action="Get" class="nav-link">
-                            <i class="bi bi-cart4" style="font-size: 2.5em;"></i>
-                            <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
-                            </a>
+                        <div class="row">
+                            <div class="col-md">
+                                <form method="post" asp-controller="Account" asp-action="Logout" class="nav-link">
+                                    <button type="submit" style="background-color:unset;border:none;">
+                                    <i class="bi bi-person" style="font-size: 2.5em;padding-left:0.05em"></i>
+                                    <p style="margin-top:-1em;">Выйти</p>
+                                    </button>
+                                </form>
                             </div>
-
+                            <div class="col-md"><a asp-controller="Basket" asp-action="Get" class="nav-link">
+                                <i class="bi bi-cart4" style="font-size: 2.5em;"></i>
+                                <p style="margin-top:-0.9em; margin-left:-0.35em">Корзина</p></a>
+                            
+                            </div>
+                        </div>
                     }
                     else
                     {
-                        <div><a asp-controller="Account" asp-action="Login" class="nav-link"> 
-                            <i class="bi bi-person" style="font-size: 2.5em; margin-right:0.30em"></i>
-                            <p style="margin-top:-0.9em;">Login</p></a>
-                        </div>
+                        <div class="row">
+                            <div class="col-md"><a asp-controller="Account" asp-action="Login" class="nav-link"> 
+                                <i class="bi bi-person" style="font-size: 2.5em; margin-right:0.30em"></i>
+                                <p style="margin-top:-1em;">Войти</p></a>
+                            </div>
 
-                        <div>
-                            <i class="bi bi-cart4" style="font-size: 2.5em;"></i>
-                            <p style="margin-top:-0.9em; margin-left:0.25em">Cart</p>
+                            <div class="col-md">
+                                <i class="bi bi-cart4" style="font-size: 2.5em;"></i>
+                                <p style="margin-top:-0.9em; margin-left:-0.35em">Корзина</p>
+                            </div>
                         </div>
                     }
                 </div>

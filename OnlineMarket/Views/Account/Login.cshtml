@@ -2,24 +2,31 @@
 @model LoginVM
 
 
-<p>Login</p>
+<h3>Вход</h3>
 
 <form asp-action="Login" method="post">
 
     <div asp-validation-summary="ModelOnly" style="font-size:23px; font-family:Impact, serif" class="text-danger text-center"></div>
     <div class="row">
         <div class="form-group col-md-4">
-            <label asp-for="@Model.UserName" class="col-form-label"></label>
+            <label asp-for="@Model.UserName" class="col-form-label">Логин</label>
             <input type="text" class="form-control" asp-for="@Model.UserName">
             <span asp-validation-for="@Model.UserName" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="@Model.Password" class="col-form-label"></label>
+            <label asp-for="@Model.Password" class="col-form-label">Пароль</label>
             <input type="password" class="form-control" asp-for="@Model.Password">
             <span asp-validation-for="@Model.Password" class="text-danger"></span>
         </div>
     </div>
     <p></p>
+    <div class="row">
+        <div class="col-md-4">
     <button class="btn btn-primary">Отправить</button>
+    </div>
+    <div class="col-md-4">
+    <a class="btn btn-primary" href="/Account/Register">Регистрация</a>
+</div>
+</div>
 </form>
 

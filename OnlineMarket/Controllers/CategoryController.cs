@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
@@ -6,6 +7,7 @@ using OnlineMarket.BLL.ViewModels.Category;
 
 namespace OnlineMarket.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -41,9 +43,18 @@ namespace OnlineMarket.Controllers
         public async Task<IActionResult> Create()
         {
             CategoryVM categoryVM = new CategoryVM();
+            List<CategoryVM> categoryVMs = new List<CategoryVM>();
             var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).OrderBy(x => x.CategoryName).ToListAsync();
+            foreach (var sub in category)
+            {
+                CategoryVM subVM = new CategoryVM();
+                subVM.CategoryName = sub.CategoryName;
+                subVM.Id = sub.Id;
+                categoryVMs.Add(subVM);
 
-            ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
+            }
+
+            ViewData["Category"] = categoryVMs;
 
             return View(categoryVM);
         }
@@ -52,9 +63,17 @@ namespace OnlineMarket.Controllers
         public async Task<IActionResult> Create(CategoryVM category)
         {
             CategoryVM categoryVM = new CategoryVM();
-            var categoryList = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).OrderBy(x => x.CategoryName).ToListAsync();
+            List<CategoryVM> categoryVMs = new List<CategoryVM>();
+            var categoryQ = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).OrderBy(x => x.CategoryName).ToListAsync();
+            foreach (var sub in categoryQ)
+            {
+                CategoryVM subVM = new CategoryVM();
+                subVM.CategoryName = sub.CategoryName;
+                subVM.Id = sub.Id;
+                categoryVMs.Add(subVM);
+            }
 
-            ViewData["Category"] = new SelectList(categoryList, "Id", "CategoryName");
+            ViewData["Category"] = categoryVMs;
 
             if (ModelState.IsValid)
             {

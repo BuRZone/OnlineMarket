@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarket.BLL.Service.Interfaces;
+using OnlineMarket.BLL.ViewModels.Category;
 using OnlineMarket.BLL.ViewModels.Product;
 using OnlineMarket.Models;
 
@@ -12,11 +13,13 @@ namespace OnlineMarket.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IBasketService _basketService;
-        public ProductController(IProductService productService, ICategoryService categoryService, IBasketService basketService)
+        private readonly ISubCategoryService _subCategoryService;
+        public ProductController(IProductService productService, ICategoryService categoryService, IBasketService basketService, ISubCategoryService subCategoryService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _basketService = basketService;
+            _subCategoryService = subCategoryService;
         }
         public IActionResult Index()
         {
@@ -50,20 +53,43 @@ namespace OnlineMarket.Controllers
         public async Task<IActionResult> Create()
         {
             ProductVM productVM = new ProductVM();
+            List<CategoryVM> categoryVMList = new List<CategoryVM>();
             var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).ToListAsync();
-
-            ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
+            foreach (var cat in category)
+            {
+                CategoryVM categoryVM = new CategoryVM();
+                categoryVM.CategoryName = cat.CategoryName;
+                categoryVM.Id = cat.Id;
+                categoryVMList.Add(categoryVM);
+                
+            }
+            this.ViewBag.Category = new SelectList(categoryVMList, "Id", "CategoryName");
 
             return View(productVM);
+        }
+        public async Task<List<SubCategoryVM>> SelectSubCategory(int? id)
+        {
+            List<SubCategoryVM>? subCategoryVMList = new List<SubCategoryVM>();
+            var subCategory = await _subCategoryService.GetAsync().Where(x => x.CategoryId == id).Select(x => new { x.Id, x.CategoryName }).ToListAsync();
+            foreach (var sub in subCategory)
+            {
+                SubCategoryVM subVM = new SubCategoryVM();
+                subVM.Id = sub.Id;
+                subVM.CategoryName = sub.CategoryName;
+                subCategoryVMList.Add(subVM);
+            }
+
+            return subCategoryVMList;
+             
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(ProductVM productVM, byte[]? imageData)
         {
             ProductVM prod = new ProductVM();
-            var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).ToListAsync();
+            //var category = await _categoryService.GetAsync().Select(x => new { x.Id, x.CategoryName }).ToListAsync();
 
-            ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
+            //ViewData["Category"] = new SelectList(category, "Id", "CategoryName");
 
             if (productVM.Price == default)
             {
