@@ -9,12 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddSingleton(new MongoClient("mongodb://localhost:27017")); // подключение к MongoDb
-//builder.Services.AddScoped<IBaseRepository<Category>, MongoCategroyRepository>();
-
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseSqlite(connectionString));
 
 
 builder.Services.InitializeRepositories();
@@ -31,16 +28,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<ApplicationDbContext>();
-    DbInitializer.Initialize(context);
-    //Женская_Верхняя_Одежда.Initialize(context);
-    //Женские_Брюки.Initialize(context);
-    //Женские_Свитеры.Initialize(context);
-}
 
 
 // Configure the HTTP request pipeline.
